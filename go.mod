@@ -1,4 +1,4 @@
-module github.com/deislabs/smi-api
+module github.com/deislabs/smi-sdk-go
 
 go 1.12
 
