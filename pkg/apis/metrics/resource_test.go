@@ -1,6 +1,7 @@
 package metrics
 
 import (
+	"strings"
 	"testing"
 	"time"
 
@@ -24,14 +25,22 @@ func TestNewResource(t *testing.T) {
 				Namespace:  "bar",
 			},
 			[]string{"deployments", "bar"},
-			0,
+			8,
+		},
+		{
+			&v1.ObjectReference{
+				Kind:      "Random",
+				Namespace: "other",
+			},
+			[]string{"unsupported", "other"},
+			7,
 		},
 		{
 			&v1.ObjectReference{
 				Kind: "Random",
 			},
 			[]string{"unsupported"},
-			0,
+			5,
 		},
 		{
 			&v1.ObjectReference{
@@ -40,7 +49,7 @@ func TestNewResource(t *testing.T) {
 				Name:       "foo",
 			},
 			[]string{"namespaces", "foo"},
-			0,
+			6,
 		},
 	}
 
@@ -60,6 +69,7 @@ func TestNewResource(t *testing.T) {
 			for _, item := range tc.has {
 				assert.Contains(r.ObjectMeta.SelfLink, item)
 			}
+			assert.Len(strings.Split(r.ObjectMeta.SelfLink, "/"), tc.len)
 			assert.Equal(tc.obj.Name, r.ObjectMeta.Name)
 			assert.Equal(tc.obj.Namespace, r.ObjectMeta.Namespace)
 
