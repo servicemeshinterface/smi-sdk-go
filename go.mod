@@ -2,4 +2,8 @@ module github.com/deislabs/smi-api
 
 go 1.12
 
-require k8s.io/apimachinery v0.0.0-20190425132440-17f84483f500
+require (
+	github.com/gogo/protobuf v1.1.1 // indirect
+	k8s.io/api v0.0.0-20190502092556-ab319681b1a5
+	k8s.io/apimachinery v0.0.0-20190502092502-a44ef629a3c9
+)
