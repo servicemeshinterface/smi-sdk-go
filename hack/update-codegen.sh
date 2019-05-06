@@ -13,7 +13,9 @@ bindir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 rootdir="$( cd $bindir/.. && pwd )"
 
 # run the code-generator entrypoint script
-${rootdir}/vendor/k8s.io/code-generator/generate-groups.sh all "$ROOT_PACKAGE/gen/client" "$ROOT_PACKAGE/gen/apis" "$CUSTOM_RESOURCE_NAME:$CUSTOM_RESOURCE_VERSION"
+genver=$( awk '/k8s.io\/code-generator/ { print $2 }' "$rootdir/go.mod" )
+gendir=${GOPATH}/pkg/mod/k8s.io/code-generator@${genver}
+${gendir}/generate-groups.sh all "$ROOT_PACKAGE/gen/client" "$ROOT_PACKAGE/gen/apis" "$CUSTOM_RESOURCE_NAME:$CUSTOM_RESOURCE_VERSION"
 
 # The generate-groups.sh script cannot handle group names with dashes, so we use
 # smispec.io as the group name, then replace it with smi-spec.io after code
