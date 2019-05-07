@@ -15,6 +15,7 @@ rootdir="$( cd $bindir/.. && pwd )"
 # run the code-generator entrypoint script
 genver=$( awk '/k8s.io\/code-generator/ { print $2 }' "$rootdir/go.mod" )
 gendir=${GOPATH}/pkg/mod/k8s.io/code-generator@${genver}
+chmod +x ${gendir}/generate-groups.sh
 ${gendir}/generate-groups.sh all "$ROOT_PACKAGE/gen/client" "$ROOT_PACKAGE/gen/apis" "$CUSTOM_RESOURCE_NAME:$CUSTOM_RESOURCE_VERSION"
 
 # The generate-groups.sh script cannot handle group names with dashes, so we use
