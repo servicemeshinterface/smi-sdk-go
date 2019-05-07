@@ -19,7 +19,7 @@ limitations under the License.
 package versioned
 
 import (
-	smispecv1beta1 "github.com/deislabs/smi-sdk-go/gen/client/clientset/versioned/typed/trafficsplit/v1beta1"
+	smispecv1beta1 "github.com/deislabs/smi-sdk-go/gen/client/trafficsplit/clientset/versioned/typed/trafficsplit/v1beta1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -28,8 +28,6 @@ import (
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
 	SmispecV1beta1() smispecv1beta1.SmispecV1beta1Interface
-	// Deprecated: please explicitly pick a version if possible.
-	Smispec() smispecv1beta1.SmispecV1beta1Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
@@ -41,12 +39,6 @@ type Clientset struct {
 
 // SmispecV1beta1 retrieves the SmispecV1beta1Client
 func (c *Clientset) SmispecV1beta1() smispecv1beta1.SmispecV1beta1Interface {
-	return c.smispecV1beta1
-}
-
-// Deprecated: Smispec retrieves the default version of SmispecClient.
-// Please explicitly pick a version.
-func (c *Clientset) Smispec() smispecv1beta1.SmispecV1beta1Interface {
 	return c.smispecV1beta1
 }
 

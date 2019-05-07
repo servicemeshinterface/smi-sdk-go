@@ -22,7 +22,7 @@ import (
 	"time"
 
 	v1beta1 "github.com/deislabs/smi-sdk-go/gen/apis/trafficsplit/v1beta1"
-	scheme "github.com/deislabs/smi-sdk-go/gen/client/clientset/versioned/scheme"
+	scheme "github.com/deislabs/smi-sdk-go/gen/client/trafficsplit/clientset/versioned/scheme"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"

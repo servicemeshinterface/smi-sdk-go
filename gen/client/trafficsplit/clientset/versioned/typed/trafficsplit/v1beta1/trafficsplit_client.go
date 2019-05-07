@@ -20,8 +20,7 @@ package v1beta1
 
 import (
 	v1beta1 "github.com/deislabs/smi-sdk-go/gen/apis/trafficsplit/v1beta1"
-	"github.com/deislabs/smi-sdk-go/gen/client/clientset/versioned/scheme"
-	serializer "k8s.io/apimachinery/pkg/runtime/serializer"
+	"github.com/deislabs/smi-sdk-go/gen/client/trafficsplit/clientset/versioned/scheme"
 	rest "k8s.io/client-go/rest"
 )
 
@@ -71,7 +70,7 @@ func setConfigDefaults(config *rest.Config) error {
 	gv := v1beta1.SchemeGroupVersion
 	config.GroupVersion = &gv
 	config.APIPath = "/apis"
-	config.NegotiatedSerializer = serializer.DirectCodecFactory{CodecFactory: scheme.Codecs}
+	config.NegotiatedSerializer = scheme.Codecs.WithoutConversion()
 
 	if config.UserAgent == "" {
 		config.UserAgent = rest.DefaultKubernetesUserAgent()

@@ -19,9 +19,9 @@ limitations under the License.
 package fake
 
 import (
-	clientset "github.com/deislabs/smi-sdk-go/gen/client/clientset/versioned"
-	smispecv1beta1 "github.com/deislabs/smi-sdk-go/gen/client/clientset/versioned/typed/trafficsplit/v1beta1"
-	fakesmispecv1beta1 "github.com/deislabs/smi-sdk-go/gen/client/clientset/versioned/typed/trafficsplit/v1beta1/fake"
+	clientset "github.com/deislabs/smi-sdk-go/gen/client/trafficsplit/clientset/versioned"
+	smispecv1beta1 "github.com/deislabs/smi-sdk-go/gen/client/trafficsplit/clientset/versioned/typed/trafficsplit/v1beta1"
+	fakesmispecv1beta1 "github.com/deislabs/smi-sdk-go/gen/client/trafficsplit/clientset/versioned/typed/trafficsplit/v1beta1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -41,7 +41,7 @@ func NewSimpleClientset(objects ...runtime.Object) *Clientset {
 		}
 	}
 
-	cs := &Clientset{}
+	cs := &Clientset{tracker: o}
 	cs.discovery = &fakediscovery.FakeDiscovery{Fake: &cs.Fake}
 	cs.AddReactor("*", "*", testing.ObjectReaction(o))
 	cs.AddWatchReactor("*", func(action testing.Action) (handled bool, ret watch.Interface, err error) {
@@ -63,20 +63,20 @@ func NewSimpleClientset(objects ...runtime.Object) *Clientset {
 type Clientset struct {
 	testing.Fake
 	discovery *fakediscovery.FakeDiscovery
+	tracker   testing.ObjectTracker
 }
 
 func (c *Clientset) Discovery() discovery.DiscoveryInterface {
 	return c.discovery
 }
 
+func (c *Clientset) Tracker() testing.ObjectTracker {
+	return c.tracker
+}
+
 var _ clientset.Interface = &Clientset{}
 
 // SmispecV1beta1 retrieves the SmispecV1beta1Client
 func (c *Clientset) SmispecV1beta1() smispecv1beta1.SmispecV1beta1Interface {
-	return &fakesmispecv1beta1.FakeSmispecV1beta1{Fake: &c.Fake}
-}
-
-// Smispec retrieves the SmispecV1beta1Client
-func (c *Clientset) Smispec() smispecv1beta1.SmispecV1beta1Interface {
 	return &fakesmispecv1beta1.FakeSmispecV1beta1{Fake: &c.Fake}
 }

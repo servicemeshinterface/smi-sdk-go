@@ -19,7 +19,7 @@ limitations under the License.
 package fake
 
 import (
-	v1beta1 "github.com/deislabs/smi-sdk-go/gen/client/clientset/versioned/typed/trafficsplit/v1beta1"
+	v1beta1 "github.com/deislabs/smi-sdk-go/gen/client/trafficsplit/clientset/versioned/typed/trafficsplit/v1beta1"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
 )
