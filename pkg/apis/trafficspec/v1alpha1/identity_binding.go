@@ -40,3 +40,13 @@ type TrafficTargetRef struct {
 	// Name of the TrafficTarget
 	Name string `json:"name,omitempty" protobuf:"bytes,2,opt,name=name"`
 }
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// IdentityBindingList satisfy K8s code gen requirements
+type IdentityBindingList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata"`
+
+	Items []IdentityBinding `json:"items"`
+}

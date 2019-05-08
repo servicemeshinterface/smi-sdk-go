@@ -40,3 +40,13 @@ type TrafficTargetRules struct {
 	// Matches is a list of TrafficSpec routes to allow traffic for
 	Matches []string `json:"matches,omitempty" protobuf:"bytes,3,opt,name=matches"`
 }
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// TrafficTargetList satisfy K8s code gen requirements
+type TrafficTargetList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata"`
+
+	Items []TrafficTarget `json:"items"`
+}

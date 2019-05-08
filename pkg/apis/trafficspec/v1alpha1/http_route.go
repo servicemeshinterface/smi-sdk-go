@@ -19,7 +19,7 @@ type HTTPRoutes struct {
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
 	// Routes for inbound traffic
-	Routes []HTTPRoute `json:"routes,omitempty" protobuf::bytes,2,opt,name=routes"`
+	Routes []HTTPRoute `json:"routes,omitempty" protobuf:"bytes,2,opt,name=routes"`
 }
 
 // HTTPRoute defines an individual route for HTTP traffic
@@ -57,3 +57,13 @@ const (
 	// HTTPRouteMethodPatch HTTP PATCH method
 	HTTPRouteMethodPatch HTTPRouteMethod = "PATCH"
 )
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// HTTPRoutesList satisfy K8s code gen requirements
+type HTTPRoutesList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata"`
+
+	Items []HTTPRoutes `json:"items"`
+}
