@@ -12,7 +12,7 @@ import (
 // the name of the group and the version of the API
 var SchemeGroupVersion = schema.GroupVersion{
 	Group:   ts.GroupName,
-	Version: "v1beta1",
+	Version: "v1alpha1",
 }
 
 // Kind takes an unqualified kind and returns back a Group qualified GroupKind
