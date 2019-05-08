@@ -8,7 +8,7 @@ import (
 )
 
 // NewTrafficMetrics constructs a TrafficMetrics with all the defaults
-func NewTrafficMetrics(obj *v1.ObjectReference) *TrafficMetrics {
+func NewTrafficMetrics(obj, edge *v1.ObjectReference) *TrafficMetrics {
 	var selfLink string
 
 	// If Namespace is empty, it is assumed that this is a non-namespaced resource.
@@ -23,13 +23,17 @@ func NewTrafficMetrics(obj *v1.ObjectReference) *TrafficMetrics {
 			obj.Name)
 	}
 
+	if edge != nil {
+		selfLink = path.Join(selfLink, "edges")
+	}
+
 	metrics := []*Metric{}
 	for _, m := range AvailableMetrics {
 		n := *m
 		metrics = append(metrics, &n)
 	}
 
-	return &TrafficMetrics{
+	resource := &TrafficMetrics{
 		TypeMeta: metav1.TypeMeta{
 			Kind:       "TrafficMetrics",
 			APIVersion: APIVersion,
@@ -43,6 +47,14 @@ func NewTrafficMetrics(obj *v1.ObjectReference) *TrafficMetrics {
 		Resource: obj,
 		Metrics:  metrics,
 	}
+
+	if edge != nil {
+		resource.Edge = &Edge{
+			Resource: edge,
+		}
+	}
+
+	return resource
 }
 
 // TrafficMetrics provide the metrics for a specific resource

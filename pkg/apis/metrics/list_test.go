@@ -60,9 +60,15 @@ func TestListGet(t *testing.T) {
 		Name:      "foo",
 	}
 
-	assert.Equal(obj, lst.Get(obj).Resource)
+	assert.Equal(obj, lst.Get(obj, nil).Resource)
 	assert.Len(lst.Items, 1)
 
-	assert.Equal(obj, lst.Get(obj).Resource)
+	assert.Equal(obj, lst.Get(obj, nil).Resource)
 	assert.Len(lst.Items, 1)
+
+	assert.Equal(obj, lst.Get(obj, obj).Edge.Resource)
+	assert.Len(lst.Items, 2)
+
+	assert.Equal(obj, lst.Get(obj, obj).Edge.Resource)
+	assert.Len(lst.Items, 2)
 }

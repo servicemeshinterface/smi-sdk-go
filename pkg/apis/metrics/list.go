@@ -30,20 +30,26 @@ func NewTrafficMetricsList(obj *v1.ObjectReference) *TrafficMetricsList {
 	}
 }
 
+func (lst *TrafficMetricsList) match(left, right *v1.ObjectReference) bool {
+	return left.Kind == right.Kind &&
+		left.Namespace == right.Namespace &&
+		left.Name == right.Name
+}
+
 // Get will get the item that is associated with the object
 // reference or create a default if it doesn't already exist.
 func (lst *TrafficMetricsList) Get(
-	obj *v1.ObjectReference) *TrafficMetrics {
+	obj, edge *v1.ObjectReference) *TrafficMetrics {
 
 	for _, item := range lst.Items {
-		if obj.Kind == item.Resource.Kind &&
-			obj.Namespace == item.Resource.Namespace &&
-			obj.Name == item.Resource.Name {
-			return item
+		if lst.match(obj, item.Resource) {
+			if edge == nil || lst.match(edge, item.Edge.Resource) {
+				return item
+			}
 		}
 	}
 
-	t := NewTrafficMetrics(obj)
+	t := NewTrafficMetrics(obj, edge)
 	lst.Items = append(lst.Items, t)
 
 	return t
