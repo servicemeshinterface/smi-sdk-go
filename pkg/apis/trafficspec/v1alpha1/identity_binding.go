@@ -34,13 +34,12 @@ type IdentityBindingSubjects struct {
 }
 
 // TrafficTargetRef is a reference to a TrafficTarget object
+// TrafficTarget will always be in the same namespace as the IdentityBinding
 type TrafficTargetRef struct {
 	// Kind is the type of TrafficTarget reference (TrafficTarget)
 	Kind string `json:"kind,omitempty" protobuf:"bytes,1,opt,name=kind"`
 	// Name of the TrafficTarget
 	Name string `json:"name,omitempty" protobuf:"bytes,2,opt,name=name"`
-	// Namespace where the TrafficTarget is deployed
-	Namespace string `json:"namespace,omitempty" protobuf:"bytes,3,opt,name=namespace"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
