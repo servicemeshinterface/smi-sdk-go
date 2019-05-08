@@ -51,8 +51,8 @@ func (f *genericInformer) Lister() cache.GenericLister {
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
 	// Group=smispec.io, Version=v1alpha1
-	case v1alpha1.SchemeGroupVersion.WithResource("httproutes"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1alpha1().HTTPRoutes().Informer()}, nil
+	case v1alpha1.SchemeGroupVersion.WithResource("httproutegroups"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1alpha1().HTTPRouteGroups().Informer()}, nil
 	case v1alpha1.SchemeGroupVersion.WithResource("identitybindings"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1alpha1().IdentityBindings().Informer()}, nil
 	case v1alpha1.SchemeGroupVersion.WithResource("tcproutes"):

@@ -8,9 +8,9 @@ import (
 // +genclient:noStatus
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// HTTPRoute is used to describe HTTP/1 and HTTP/2 traffic.
+// HTTPRouteGroup is used to describe HTTP/1 and HTTP/2 traffic.
 // It enumerates the routes that can be served by an application.
-type HTTPRoute struct {
+type HTTPRouteGroup struct {
 	metav1.TypeMeta `json:",inline"`
 
 	// Standard object's metadata.
@@ -18,8 +18,16 @@ type HTTPRoute struct {
 	// +optional
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
+	// Most recently observed status of the object.
+	// This data may not be up to date.
+	// Populated by the system.
+	// Read-only.
+	// More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status
+	// +optional
+	Status Status `json:"status,omitempty" protobuf:"bytes,2,opt,name=status"`
+
 	// Routes for inbound traffic
-	Matches []HTTPMatch `json:"matches,omitempty" protobuf:"bytes,2,opt,name=matches"`
+	Matches []HTTPMatch `json:"matches,omitempty" protobuf:"bytes,3,opt,name=matches"`
 }
 
 // HTTPMatch defines an individual route for HTTP traffic
@@ -63,10 +71,10 @@ const (
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// HTTPRouteList satisfy K8s code gen requirements
-type HTTPRouteList struct {
+// HTTPRouteGroupList satisfy K8s code gen requirements
+type HTTPRouteGroupList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata"`
 
-	Items []HTTPRoute `json:"items"`
+	Items []HTTPRouteGroup `json:"items"`
 }

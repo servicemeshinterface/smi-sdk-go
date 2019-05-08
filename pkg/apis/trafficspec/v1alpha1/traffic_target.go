@@ -18,11 +18,19 @@ type TrafficTarget struct {
 	// +optional
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
+	// Most recently observed status of the object.
+	// This data may not be up to date.
+	// Populated by the system.
+	// Read-only.
+	// More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status
+	// +optional
+	Status Status `json:"status,omitempty" protobuf:"bytes,2,opt,name=status"`
+
 	// Selector is the pod or group of pods to allow ingress traffic
-	Selector TrafficTargetSelector `json:"selector,omitempty" protobuf:"bytes,2,opt,name=selector"`
+	Selector TrafficTargetSelector `json:"selector,omitempty" protobuf:"bytes,3,opt,name=selector"`
 
 	// Rules are the traffic rules to allow (HTTPRoutes | TCPRoute),
-	Rules []TrafficTargetRule `json:"rules,omitempty" protobuf:"bytes,3,opt,name=rules"`
+	Rules []TrafficTargetRule `json:"rules,omitempty" protobuf:"bytes,4,opt,name=rules"`
 }
 
 // TrafficTargetSelector defines the pods to select for inbound traffic

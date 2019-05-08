@@ -16,11 +16,19 @@ type IdentityBinding struct {
 	// +optional
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
+	// Most recently observed status of the object.
+	// This data may not be up to date.
+	// Populated by the system.
+	// Read-only.
+	// More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status
+	// +optional
+	Status Status `json:"status,omitempty" protobuf:"bytes,2,opt,name=status"`
+
 	// Subjects are the pod or group of pods to allow ingress traffic
-	Subjects []IdentityBindingSubjects `json:"subjects,omitempty" protobuf:"bytes,2,opt,name=subjects"`
+	Subjects []IdentityBindingSubjects `json:"subjects,omitempty" protobuf:"bytes,3,opt,name=subjects"`
 
 	// TargetRef is the traffic target to which this binding applies
-	TargetRef TrafficTargetRef `json:"targetRef,omitempty" protobuf:"bytes,3,opt,name=targetRef"`
+	TargetRef TrafficTargetRef `json:"targetRef,omitempty" protobuf:"bytes,4,opt,name=targetRef"`
 }
 
 // IdentityBindingSubjects are Kubernetes objects which should be allowed access to the TrafficTarget

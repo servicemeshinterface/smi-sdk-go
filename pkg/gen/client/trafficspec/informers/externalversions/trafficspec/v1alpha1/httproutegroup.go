@@ -29,59 +29,59 @@ import (
 	cache "k8s.io/client-go/tools/cache"
 )
 
-// HTTPRouteInformer provides access to a shared informer and lister for
-// HTTPRoutes.
-type HTTPRouteInformer interface {
+// HTTPRouteGroupInformer provides access to a shared informer and lister for
+// HTTPRouteGroups.
+type HTTPRouteGroupInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1alpha1.HTTPRouteLister
+	Lister() v1alpha1.HTTPRouteGroupLister
 }
 
-type hTTPRouteInformer struct {
+type hTTPRouteGroupInformer struct {
 	factory          internalinterfaces.SharedInformerFactory
 	tweakListOptions internalinterfaces.TweakListOptionsFunc
 	namespace        string
 }
 
-// NewHTTPRouteInformer constructs a new informer for HTTPRoute type.
+// NewHTTPRouteGroupInformer constructs a new informer for HTTPRouteGroup type.
 // Always prefer using an informer factory to get a shared informer instead of getting an independent
 // one. This reduces memory footprint and number of connections to the server.
-func NewHTTPRouteInformer(client versioned.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers) cache.SharedIndexInformer {
-	return NewFilteredHTTPRouteInformer(client, namespace, resyncPeriod, indexers, nil)
+func NewHTTPRouteGroupInformer(client versioned.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers) cache.SharedIndexInformer {
+	return NewFilteredHTTPRouteGroupInformer(client, namespace, resyncPeriod, indexers, nil)
 }
 
-// NewFilteredHTTPRouteInformer constructs a new informer for HTTPRoute type.
+// NewFilteredHTTPRouteGroupInformer constructs a new informer for HTTPRouteGroup type.
 // Always prefer using an informer factory to get a shared informer instead of getting an independent
 // one. This reduces memory footprint and number of connections to the server.
-func NewFilteredHTTPRouteInformer(client versioned.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
+func NewFilteredHTTPRouteGroupInformer(client versioned.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
 		&cache.ListWatch{
 			ListFunc: func(options v1.ListOptions) (runtime.Object, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.SmispecV1alpha1().HTTPRoutes(namespace).List(options)
+				return client.SmispecV1alpha1().HTTPRouteGroups(namespace).List(options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.SmispecV1alpha1().HTTPRoutes(namespace).Watch(options)
+				return client.SmispecV1alpha1().HTTPRouteGroups(namespace).Watch(options)
 			},
 		},
-		&trafficspecv1alpha1.HTTPRoute{},
+		&trafficspecv1alpha1.HTTPRouteGroup{},
 		resyncPeriod,
 		indexers,
 	)
 }
 
-func (f *hTTPRouteInformer) defaultInformer(client versioned.Interface, resyncPeriod time.Duration) cache.SharedIndexInformer {
-	return NewFilteredHTTPRouteInformer(client, f.namespace, resyncPeriod, cache.Indexers{cache.NamespaceIndex: cache.MetaNamespaceIndexFunc}, f.tweakListOptions)
+func (f *hTTPRouteGroupInformer) defaultInformer(client versioned.Interface, resyncPeriod time.Duration) cache.SharedIndexInformer {
+	return NewFilteredHTTPRouteGroupInformer(client, f.namespace, resyncPeriod, cache.Indexers{cache.NamespaceIndex: cache.MetaNamespaceIndexFunc}, f.tweakListOptions)
 }
 
-func (f *hTTPRouteInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&trafficspecv1alpha1.HTTPRoute{}, f.defaultInformer)
+func (f *hTTPRouteGroupInformer) Informer() cache.SharedIndexInformer {
+	return f.factory.InformerFor(&trafficspecv1alpha1.HTTPRouteGroup{}, f.defaultInformer)
 }
 
-func (f *hTTPRouteInformer) Lister() v1alpha1.HTTPRouteLister {
-	return v1alpha1.NewHTTPRouteLister(f.Informer().GetIndexer())
+func (f *hTTPRouteGroupInformer) Lister() v1alpha1.HTTPRouteGroupLister {
+	return v1alpha1.NewHTTPRouteGroupLister(f.Informer().GetIndexer())
 }
