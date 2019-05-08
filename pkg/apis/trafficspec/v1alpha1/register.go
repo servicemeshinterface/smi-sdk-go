@@ -40,7 +40,7 @@ var (
 // Adds the list of known types to Scheme.
 func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(SchemeGroupVersion,
-		&HTTPRoutes{},
+		&HTTPRoute{},
 		&TCPRoute{},
 		&TrafficTarget{},
 		&IdentityBinding{},
