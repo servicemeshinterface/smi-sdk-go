@@ -30,8 +30,16 @@ func (c *FakeSmispecV1beta1) HTTPRouteses(namespace string) v1beta1.HTTPRoutesIn
 	return &FakeHTTPRouteses{c, namespace}
 }
 
+func (c *FakeSmispecV1beta1) IdentityBindings(namespace string) v1beta1.IdentityBindingInterface {
+	return &FakeIdentityBindings{c, namespace}
+}
+
 func (c *FakeSmispecV1beta1) TCPRoutes(namespace string) v1beta1.TCPRouteInterface {
 	return &FakeTCPRoutes{c, namespace}
+}
+
+func (c *FakeSmispecV1beta1) TrafficTargets(namespace string) v1beta1.TrafficTargetInterface {
+	return &FakeTrafficTargets{c, namespace}
 }
 
 // RESTClient returns a RESTClient that is used to communicate

@@ -53,8 +53,12 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 	// Group=smispec.io, Version=v1beta1
 	case v1beta1.SchemeGroupVersion.WithResource("httprouteses"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1beta1().HTTPRouteses().Informer()}, nil
+	case v1beta1.SchemeGroupVersion.WithResource("identitybindings"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1beta1().IdentityBindings().Informer()}, nil
 	case v1beta1.SchemeGroupVersion.WithResource("tcproutes"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1beta1().TCPRoutes().Informer()}, nil
+	case v1beta1.SchemeGroupVersion.WithResource("traffictargets"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1beta1().TrafficTargets().Informer()}, nil
 
 	}
 

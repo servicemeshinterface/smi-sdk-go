@@ -24,6 +24,14 @@ type HTTPRoutesListerExpansion interface{}
 // HTTPRoutesNamespaceLister.
 type HTTPRoutesNamespaceListerExpansion interface{}
 
+// IdentityBindingListerExpansion allows custom methods to be added to
+// IdentityBindingLister.
+type IdentityBindingListerExpansion interface{}
+
+// IdentityBindingNamespaceListerExpansion allows custom methods to be added to
+// IdentityBindingNamespaceLister.
+type IdentityBindingNamespaceListerExpansion interface{}
+
 // TCPRouteListerExpansion allows custom methods to be added to
 // TCPRouteLister.
 type TCPRouteListerExpansion interface{}
@@ -31,3 +39,11 @@ type TCPRouteListerExpansion interface{}
 // TCPRouteNamespaceListerExpansion allows custom methods to be added to
 // TCPRouteNamespaceLister.
 type TCPRouteNamespaceListerExpansion interface{}
+
+// TrafficTargetListerExpansion allows custom methods to be added to
+// TrafficTargetLister.
+type TrafficTargetListerExpansion interface{}
+
+// TrafficTargetNamespaceListerExpansion allows custom methods to be added to
+// TrafficTargetNamespaceLister.
+type TrafficTargetNamespaceListerExpansion interface{}

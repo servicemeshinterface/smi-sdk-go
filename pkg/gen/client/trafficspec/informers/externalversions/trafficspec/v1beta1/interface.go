@@ -24,8 +24,12 @@ import (
 type Interface interface {
 	// HTTPRouteses returns a HTTPRoutesInformer.
 	HTTPRouteses() HTTPRoutesInformer
+	// IdentityBindings returns a IdentityBindingInformer.
+	IdentityBindings() IdentityBindingInformer
 	// TCPRoutes returns a TCPRouteInformer.
 	TCPRoutes() TCPRouteInformer
+	// TrafficTargets returns a TrafficTargetInformer.
+	TrafficTargets() TrafficTargetInformer
 }
 
 type version struct {
@@ -44,7 +48,17 @@ func (v *version) HTTPRouteses() HTTPRoutesInformer {
 	return &hTTPRoutesInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
+// IdentityBindings returns a IdentityBindingInformer.
+func (v *version) IdentityBindings() IdentityBindingInformer {
+	return &identityBindingInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
 // TCPRoutes returns a TCPRouteInformer.
 func (v *version) TCPRoutes() TCPRouteInformer {
 	return &tCPRouteInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// TrafficTargets returns a TrafficTargetInformer.
+func (v *version) TrafficTargets() TrafficTargetInformer {
+	return &trafficTargetInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }

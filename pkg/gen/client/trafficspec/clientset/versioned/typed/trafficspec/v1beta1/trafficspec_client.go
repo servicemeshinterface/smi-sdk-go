@@ -25,7 +25,9 @@ import (
 type SmispecV1beta1Interface interface {
 	RESTClient() rest.Interface
 	HTTPRoutesesGetter
+	IdentityBindingsGetter
 	TCPRoutesGetter
+	TrafficTargetsGetter
 }
 
 // SmispecV1beta1Client is used to interact with features provided by the smispec.io group.
@@ -37,8 +39,16 @@ func (c *SmispecV1beta1Client) HTTPRouteses(namespace string) HTTPRoutesInterfac
 	return newHTTPRouteses(c, namespace)
 }
 
+func (c *SmispecV1beta1Client) IdentityBindings(namespace string) IdentityBindingInterface {
+	return newIdentityBindings(c, namespace)
+}
+
 func (c *SmispecV1beta1Client) TCPRoutes(namespace string) TCPRouteInterface {
 	return newTCPRoutes(c, namespace)
+}
+
+func (c *SmispecV1beta1Client) TrafficTargets(namespace string) TrafficTargetInterface {
+	return newTrafficTargets(c, namespace)
 }
 
 // NewForConfig creates a new SmispecV1beta1Client for the given config.

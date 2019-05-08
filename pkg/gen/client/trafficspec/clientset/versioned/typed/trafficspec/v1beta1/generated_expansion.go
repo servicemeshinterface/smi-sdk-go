@@ -18,4 +18,8 @@ package v1beta1
 
 type HTTPRoutesExpansion interface{}
 
+type IdentityBindingExpansion interface{}
+
 type TCPRouteExpansion interface{}
+
+type TrafficTargetExpansion interface{}

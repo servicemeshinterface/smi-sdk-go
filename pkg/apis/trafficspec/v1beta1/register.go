@@ -5,7 +5,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	ts "github.com/deislabs/smi-sdk-go/pkg/apis/trafficsplit"
+	ts "github.com/deislabs/smi-sdk-go/pkg/apis/trafficspec"
 )
 
 // SchemeGroupVersion is the identifier for the API which includes
@@ -40,8 +40,10 @@ var (
 // Adds the list of known types to Scheme.
 func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(SchemeGroupVersion,
-		&HTTPRoute{},
+		&HTTPRoutes{},
 		&TCPRoute{},
+		&TrafficTarget{},
+		&IdentityBinding{},
 	)
 	metav1.AddToGroupVersion(scheme, SchemeGroupVersion)
 	return nil
