@@ -19,7 +19,7 @@ package externalversions
 import (
 	"fmt"
 
-	v1beta1 "github.com/deislabs/smi-sdk-go/pkg/apis/trafficsplit/v1beta1"
+	v1alpha1 "github.com/deislabs/smi-sdk-go/pkg/apis/trafficsplit/v1alpha1"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
 )
@@ -50,9 +50,9 @@ func (f *genericInformer) Lister() cache.GenericLister {
 // TODO extend this to unknown resources with a client pool
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
-	// Group=smispec.io, Version=v1beta1
-	case v1beta1.SchemeGroupVersion.WithResource("trafficsplits"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1beta1().TrafficSplits().Informer()}, nil
+	// Group=smispec.io, Version=v1alpha1
+	case v1alpha1.SchemeGroupVersion.WithResource("trafficsplits"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1alpha1().TrafficSplits().Informer()}, nil
 
 	}
 

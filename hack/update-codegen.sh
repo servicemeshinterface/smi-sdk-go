@@ -6,7 +6,7 @@ set -eu
 ROOT_PACKAGE="github.com/deislabs/smi-sdk-go"
 
 # CUSTOM_RESOURCE_VERSION :: the version of the resource
-CUSTOM_RESOURCE_VERSION="v1beta1"
+CUSTOM_RESOURCE_VERSION="v1alpha1"
 
 function generate_client() {
   

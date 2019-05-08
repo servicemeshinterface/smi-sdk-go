@@ -19,7 +19,7 @@ package externalversions
 import (
 	"fmt"
 
-	v1beta1 "github.com/deislabs/smi-sdk-go/pkg/apis/trafficspec/v1beta1"
+	v1alpha1 "github.com/deislabs/smi-sdk-go/pkg/apis/trafficspec/v1alpha1"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
 )
@@ -50,15 +50,15 @@ func (f *genericInformer) Lister() cache.GenericLister {
 // TODO extend this to unknown resources with a client pool
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
-	// Group=smispec.io, Version=v1beta1
-	case v1beta1.SchemeGroupVersion.WithResource("httprouteses"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1beta1().HTTPRouteses().Informer()}, nil
-	case v1beta1.SchemeGroupVersion.WithResource("identitybindings"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1beta1().IdentityBindings().Informer()}, nil
-	case v1beta1.SchemeGroupVersion.WithResource("tcproutes"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1beta1().TCPRoutes().Informer()}, nil
-	case v1beta1.SchemeGroupVersion.WithResource("traffictargets"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1beta1().TrafficTargets().Informer()}, nil
+	// Group=smispec.io, Version=v1alpha1
+	case v1alpha1.SchemeGroupVersion.WithResource("httprouteses"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1alpha1().HTTPRouteses().Informer()}, nil
+	case v1alpha1.SchemeGroupVersion.WithResource("identitybindings"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1alpha1().IdentityBindings().Informer()}, nil
+	case v1alpha1.SchemeGroupVersion.WithResource("tcproutes"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1alpha1().TCPRoutes().Informer()}, nil
+	case v1alpha1.SchemeGroupVersion.WithResource("traffictargets"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1alpha1().TrafficTargets().Informer()}, nil
 
 	}
 

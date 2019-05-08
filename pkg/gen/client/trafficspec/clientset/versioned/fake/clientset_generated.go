@@ -18,8 +18,8 @@ package fake
 
 import (
 	clientset "github.com/deislabs/smi-sdk-go/pkg/gen/client/trafficspec/clientset/versioned"
-	smispecv1beta1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/trafficspec/clientset/versioned/typed/trafficspec/v1beta1"
-	fakesmispecv1beta1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/trafficspec/clientset/versioned/typed/trafficspec/v1beta1/fake"
+	smispecv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/trafficspec/clientset/versioned/typed/trafficspec/v1alpha1"
+	fakesmispecv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/trafficspec/clientset/versioned/typed/trafficspec/v1alpha1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -74,7 +74,7 @@ func (c *Clientset) Tracker() testing.ObjectTracker {
 
 var _ clientset.Interface = &Clientset{}
 
-// SmispecV1beta1 retrieves the SmispecV1beta1Client
-func (c *Clientset) SmispecV1beta1() smispecv1beta1.SmispecV1beta1Interface {
-	return &fakesmispecv1beta1.FakeSmispecV1beta1{Fake: &c.Fake}
+// SmispecV1alpha1 retrieves the SmispecV1alpha1Client
+func (c *Clientset) SmispecV1alpha1() smispecv1alpha1.SmispecV1alpha1Interface {
+	return &fakesmispecv1alpha1.FakeSmispecV1alpha1{Fake: &c.Fake}
 }
