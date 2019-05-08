@@ -22,7 +22,7 @@ type TrafficTarget struct {
 	Selector TrafficTargetSelector `json:"selector,omitempty" protobuf:"bytes,2,opt,name=selector"`
 
 	// Rules are the traffic rules to allow (HTTPRoutes | TCPRoute),
-	Rules []TrafficTargetRules `json:"rules,omitempty" protobuf:"bytes,3,opt,name=rules"`
+	Rules []TrafficTargetRule `json:"rules,omitempty" protobuf:"bytes,3,opt,name=rules"`
 }
 
 // TrafficTargetSelector defines the pods to select for inbound traffic
@@ -31,8 +31,8 @@ type TrafficTargetSelector struct {
 	MatchLabels map[string]string `json:"matchLabels,omitempty" protobuf:"bytes,1,opt,name=matchLabels"`
 }
 
-// TrafficTargetRules are the traffic rules to allow for a TrafficTarget
-type TrafficTargetRules struct {
+// TrafficTargetRule is the traffic rule to allow for a TrafficTarget
+type TrafficTargetRule struct {
 	// Kind is the kind of TrafficSpec to allow
 	Kind string `json:"kind,omitempty" protobuf:"bytes,1,opt,name=kind"`
 	// Name of the TrafficSpec to use
