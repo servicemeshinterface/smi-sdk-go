@@ -26,8 +26,8 @@ type FakeSmispecV1alpha1 struct {
 	*testing.Fake
 }
 
-func (c *FakeSmispecV1alpha1) HTTPRouteses(namespace string) v1alpha1.HTTPRoutesInterface {
-	return &FakeHTTPRouteses{c, namespace}
+func (c *FakeSmispecV1alpha1) HTTPRoutes(namespace string) v1alpha1.HTTPRouteInterface {
+	return &FakeHTTPRoutes{c, namespace}
 }
 
 func (c *FakeSmispecV1alpha1) IdentityBindings(namespace string) v1alpha1.IdentityBindingInterface {

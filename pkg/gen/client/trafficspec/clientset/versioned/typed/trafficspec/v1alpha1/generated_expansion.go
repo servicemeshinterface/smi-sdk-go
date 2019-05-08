@@ -16,7 +16,7 @@ limitations under the License.
 
 package v1alpha1
 
-type HTTPRoutesExpansion interface{}
+type HTTPRouteExpansion interface{}
 
 type IdentityBindingExpansion interface{}
 

@@ -8,9 +8,9 @@ import (
 // +genclient:noStatus
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// HTTPRoutes is used to describe HTTP/1 and HTTP/2 traffic.
+// HTTPRoute is used to describe HTTP/1 and HTTP/2 traffic.
 // It enumerates the routes that can be served by an application.
-type HTTPRoutes struct {
+type HTTPRoute struct {
 	metav1.TypeMeta `json:",inline"`
 
 	// Standard object's metadata.
@@ -19,17 +19,20 @@ type HTTPRoutes struct {
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
 	// Routes for inbound traffic
-	Routes []HTTPRoute `json:"routes,omitempty" protobuf:"bytes,2,opt,name=routes"`
+	Matches []HTTPMatch `json:"matches,omitempty" protobuf:"bytes,2,opt,name=matches"`
 }
 
-// HTTPRoute defines an individual route for HTTP traffic
-type HTTPRoute struct {
+// HTTPMatch defines an individual route for HTTP traffic
+type HTTPMatch struct {
+	// Name is the name of the match for referencing in a TrafficTarget
+	Name string `json:"name,omitempty" protobuf:"bytes,1,opt,name=name"`
+
 	// Methods for inbound traffic as defined in RFC 7231
 	// https://tools.ietf.org/html/rfc7231#section-4
-	Methods []string
+	Methods []string `json:"methods,omitempty" protobuf:"bytes,1,opt,name=methods"`
 
 	// PathRegex is a regular expression defining the route
-	PathRegex string
+	PathRegex string `json:"pathRegex,omitempty" protobuf:"bytes,1,opt,name=pathRegex"`
 }
 
 // HTTPRouteMethod are methods allowed by the route
@@ -65,5 +68,5 @@ type HTTPRoutesList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata"`
 
-	Items []HTTPRoutes `json:"items"`
+	Items []HTTPRoute `json:"items"`
 }

@@ -24,7 +24,7 @@ import (
 
 type SmispecV1alpha1Interface interface {
 	RESTClient() rest.Interface
-	HTTPRoutesesGetter
+	HTTPRoutesGetter
 	IdentityBindingsGetter
 	TCPRoutesGetter
 	TrafficTargetsGetter
@@ -35,8 +35,8 @@ type SmispecV1alpha1Client struct {
 	restClient rest.Interface
 }
 
-func (c *SmispecV1alpha1Client) HTTPRouteses(namespace string) HTTPRoutesInterface {
-	return newHTTPRouteses(c, namespace)
+func (c *SmispecV1alpha1Client) HTTPRoutes(namespace string) HTTPRouteInterface {
+	return newHTTPRoutes(c, namespace)
 }
 
 func (c *SmispecV1alpha1Client) IdentityBindings(namespace string) IdentityBindingInterface {

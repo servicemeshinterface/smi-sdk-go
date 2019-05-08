@@ -16,13 +16,13 @@ limitations under the License.
 
 package v1alpha1
 
-// HTTPRoutesListerExpansion allows custom methods to be added to
-// HTTPRoutesLister.
-type HTTPRoutesListerExpansion interface{}
+// HTTPRouteListerExpansion allows custom methods to be added to
+// HTTPRouteLister.
+type HTTPRouteListerExpansion interface{}
 
-// HTTPRoutesNamespaceListerExpansion allows custom methods to be added to
-// HTTPRoutesNamespaceLister.
-type HTTPRoutesNamespaceListerExpansion interface{}
+// HTTPRouteNamespaceListerExpansion allows custom methods to be added to
+// HTTPRouteNamespaceLister.
+type HTTPRouteNamespaceListerExpansion interface{}
 
 // IdentityBindingListerExpansion allows custom methods to be added to
 // IdentityBindingLister.

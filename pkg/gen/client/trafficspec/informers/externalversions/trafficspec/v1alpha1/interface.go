@@ -22,8 +22,8 @@ import (
 
 // Interface provides access to all the informers in this group version.
 type Interface interface {
-	// HTTPRouteses returns a HTTPRoutesInformer.
-	HTTPRouteses() HTTPRoutesInformer
+	// HTTPRoutes returns a HTTPRouteInformer.
+	HTTPRoutes() HTTPRouteInformer
 	// IdentityBindings returns a IdentityBindingInformer.
 	IdentityBindings() IdentityBindingInformer
 	// TCPRoutes returns a TCPRouteInformer.
@@ -43,9 +43,9 @@ func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakList
 	return &version{factory: f, namespace: namespace, tweakListOptions: tweakListOptions}
 }
 
-// HTTPRouteses returns a HTTPRoutesInformer.
-func (v *version) HTTPRouteses() HTTPRoutesInformer {
-	return &hTTPRoutesInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+// HTTPRoutes returns a HTTPRouteInformer.
+func (v *version) HTTPRoutes() HTTPRouteInformer {
+	return &hTTPRouteInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // IdentityBindings returns a IdentityBindingInformer.
