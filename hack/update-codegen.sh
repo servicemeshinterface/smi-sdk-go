@@ -21,8 +21,9 @@ function generate_client() {
   # make the generate script executable
   chmod +x ${CODEGEN_PKG}/generate-groups.sh
 
-  # delete the generated deepcopy
+  # delete the generated code as this is additive, removed objects will not be cleaned
   rm ${ROOT_DIR}/pkg/apis/${CUSTOM_RESOURCE_NAME}/${CUSTOM_RESOURCE_VERSION}/zz_generated.deepcopy.go
+  rm -rf ${ROOT_DIR}/pkg/gen/client/${CUSTOM_RESOURCE_NAME}
   
   find "${ROOT_DIR}/pkg/apis/${CUSTOM_RESOURCE_NAME}" -type f -exec sed -i 's/smi-spec.io/smispec.io/g' {} +
   
