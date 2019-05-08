@@ -19,8 +19,8 @@ type IdentityBinding struct {
 	// Subjects are the pod or group of pods to allow ingress traffic
 	Subjects []IdentityBindingSubjects `json:"subjects,omitempty" protobuf:"bytes,2,opt,name=subjects"`
 
-	// Rules are the traffic rules to allow (HTTPRoutes | TCPRoute),
-	TargetRef []TrafficTargetRef `json:"targetRef,omitempty" protobuf:"bytes,3,opt,name=targetRef"`
+	// TargetRef is the traffic target to which this binding applies
+	TargetRef TrafficTargetRef `json:"targetRef,omitempty" protobuf:"bytes,3,opt,name=targetRef"`
 }
 
 // IdentityBindingSubjects are Kubernetes objects which should be allowed access to the TrafficTarget

@@ -119,11 +119,7 @@ func (in *IdentityBinding) DeepCopyInto(out *IdentityBinding) {
 		*out = make([]IdentityBindingSubjects, len(*in))
 		copy(*out, *in)
 	}
-	if in.TargetRef != nil {
-		in, out := &in.TargetRef, &out.TargetRef
-		*out = make([]TrafficTargetRef, len(*in))
-		copy(*out, *in)
-	}
+	out.TargetRef = in.TargetRef
 	return
 }
 
