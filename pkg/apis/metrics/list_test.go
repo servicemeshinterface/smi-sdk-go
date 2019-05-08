@@ -12,6 +12,7 @@ func TestNewList(t *testing.T) {
 
 	testCases := []struct {
 		obj  *v1.ObjectReference
+		edges bool
 		link string
 	}{
 		{
@@ -21,13 +22,25 @@ func TestNewList(t *testing.T) {
 				Name:       "foo",
 				Namespace:  "bar",
 			},
+			false,
 			"deployments",
 		},
 		{
 			&v1.ObjectReference{
 				Kind: "Random",
 			},
+			false,
 			"unsupported",
+		},
+		{
+			&v1.ObjectReference{
+				APIVersion: "apps/v1",
+				Kind:       "Deployment",
+				Name:       "foo",
+				Namespace:  "bar",
+			},
+			true,
+			"namespaces/bar/deployments/foo/edges",
 		},
 	}
 
@@ -35,7 +48,7 @@ func TestNewList(t *testing.T) {
 		tc := tc
 
 		t.Run(tc.obj.Kind, func(t *testing.T) {
-			lst := NewTrafficMetricsList(tc.obj)
+			lst := NewTrafficMetricsList(tc.obj, tc.edges)
 
 			assert.Equal("TrafficMetricsList", lst.TypeMeta.Kind)
 			assert.Equal(APIVersion, lst.TypeMeta.APIVersion)
@@ -50,7 +63,7 @@ func TestNewList(t *testing.T) {
 func TestListGet(t *testing.T) {
 	assert := assertLib.New(t)
 
-	lst := NewTrafficMetricsList(&v1.ObjectReference{})
+	lst := NewTrafficMetricsList(&v1.ObjectReference{}, false)
 
 	assert.Len(lst.Items, 0)
 

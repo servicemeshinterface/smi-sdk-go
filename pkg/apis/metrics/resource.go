@@ -7,21 +7,23 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// NewTrafficMetrics constructs a TrafficMetrics with all the defaults
-func NewTrafficMetrics(obj, edge *v1.ObjectReference) *TrafficMetrics {
-	var selfLink string
-
+func uniqueSelfLink(obj *v1.ObjectReference) string {
 	// If Namespace is empty, it is assumed that this is a non-namespaced resource.
 	if obj.Namespace == "" {
-		selfLink = path.Join(baseURL(), getKindName(obj.Kind), obj.Name)
-	} else {
-		selfLink = path.Join(
-			baseURL(),
-			"namespaces",
-			obj.Namespace,
-			getKindName(obj.Kind),
-			obj.Name)
+		return path.Join(baseURL(), getKindName(obj.Kind), obj.Name)
 	}
+
+	return path.Join(
+		baseURL(),
+		"namespaces",
+		obj.Namespace,
+		getKindName(obj.Kind),
+		obj.Name)
+}
+
+// NewTrafficMetrics constructs a TrafficMetrics with all the defaults
+func NewTrafficMetrics(obj, edge *v1.ObjectReference) *TrafficMetrics {
+	selfLink := uniqueSelfLink(obj)
 
 	if edge != nil {
 		selfLink = path.Join(selfLink, "edges")

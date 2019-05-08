@@ -17,14 +17,24 @@ type TrafficMetricsList struct {
 	Items []*TrafficMetrics `json:"items"`
 }
 
-func NewTrafficMetricsList(obj *v1.ObjectReference) *TrafficMetricsList {
+// NewTrafficMetricsList constructs a new object with defaults already configured
+func NewTrafficMetricsList(
+	obj *v1.ObjectReference, edges bool) *TrafficMetricsList {
+	var selfLink string
+
+	if edges {
+		selfLink = path.Join(uniqueSelfLink(obj), "edges")
+	} else {
+		selfLink = path.Join(baseURL(), getKindName(obj.Kind))
+	}
+
 	return &TrafficMetricsList{
 		TypeMeta: metav1.TypeMeta{
 			Kind:       "TrafficMetricsList",
 			APIVersion: APIVersion,
 		},
 		ListMeta: metav1.ListMeta{
-			SelfLink: path.Join(baseURL(), getKindName(obj.Kind)),
+			SelfLink: selfLink,
 		},
 		Resource: obj,
 	}
@@ -43,7 +53,10 @@ func (lst *TrafficMetricsList) Get(
 
 	for _, item := range lst.Items {
 		if lst.match(obj, item.Resource) {
-			if edge == nil || lst.match(edge, item.Edge.Resource) {
+			if edge == nil || (
+				item.Edge != nil &&
+				item.Edge.Resource != nil &&
+				lst.match(edge, item.Edge.Resource)) {
 				return item
 			}
 		}
