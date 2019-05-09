@@ -1,6 +1,7 @@
 package v1beta1
 
 import (
+	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -41,8 +42,8 @@ type TrafficSplitSpec struct {
 
 // TrafficSplitBackend defines a backend
 type TrafficSplitBackend struct {
-	Service string `json:"service,omitempty"`
-	Weight  string `json:"weight,omitempty"`
+	Service string            `json:"service,omitempty"`
+	Weight  resource.Quantity `json:"weight,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
