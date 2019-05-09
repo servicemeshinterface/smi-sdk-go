@@ -22,7 +22,7 @@ function generate_client() {
   chmod +x ${CODEGEN_PKG}/generate-groups.sh
 
   # delete the generated code as this is additive, removed objects will not be cleaned
-  rm ${ROOT_DIR}/pkg/apis/${CUSTOM_RESOURCE_NAME}/${CUSTOM_RESOURCE_VERSION}/zz_generated.deepcopy.go
+  rm -f ${ROOT_DIR}/pkg/apis/${CUSTOM_RESOURCE_NAME}/${CUSTOM_RESOURCE_VERSION}/zz_generated.deepcopy.go
   rm -rf ${ROOT_DIR}/pkg/gen/client/${CUSTOM_RESOURCE_NAME}
   
   find "${ROOT_DIR}/pkg/apis/${CUSTOM_RESOURCE_NAME}" -type f -exec sed -i 's/smi-spec.io/smispec.io/g' {} +
@@ -45,8 +45,12 @@ function generate_client() {
 }
 
 echo "###### Generating Traffic Split Client ######"
-generate_client "trafficsplit"
+generate_client "split"
+
+echo ""
+echo "##### Generating Traffic Access Client ######"
+generate_client "specs"
 
 echo ""
 echo "##### Generating Traffic Spec Client ######"
-generate_client "trafficspec"
+generate_client "access"
