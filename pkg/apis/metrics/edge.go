@@ -1,6 +1,8 @@
 package metrics
 
 import (
+	"fmt"
+
 	v1 "k8s.io/api/core/v1"
 )
 
@@ -19,4 +21,9 @@ const (
 type Edge struct {
 	Direction Direction           `json:"direction"`
 	Resource  *v1.ObjectReference `json:"resource"`
+}
+
+// String returns a formatted string representation of this struct
+func (e *Edge) String() string {
+	return fmt.Sprintf("%#v", e)
 }

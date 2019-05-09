@@ -1,6 +1,7 @@
 package metrics
 
 import (
+	"fmt"
 	"time"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -19,4 +20,9 @@ func NewInterval() *Interval {
 		Timestamp: metav1.NewTime(time.Now()),
 		Window:    metav1.Duration{Duration: defaultWindow},
 	}
+}
+
+// String returns a formatted string representation of this struct
+func (i *Interval) String() string {
+	return fmt.Sprintf("%#v", i)
 }

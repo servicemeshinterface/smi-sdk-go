@@ -1,6 +1,7 @@
 package metrics
 
 import (
+	"fmt"
 	"path"
 
 	v1 "k8s.io/api/core/v1"
@@ -40,6 +41,11 @@ func NewTrafficMetricsList(
 	}
 }
 
+// String returns a formatted string representation of this struct
+func (lst *TrafficMetricsList) String() string {
+	return fmt.Sprintf("%#v", lst)
+}
+
 func (lst *TrafficMetricsList) match(left, right *v1.ObjectReference) bool {
 	return left.Kind == right.Kind &&
 		left.Namespace == right.Namespace &&
@@ -53,8 +59,7 @@ func (lst *TrafficMetricsList) Get(
 
 	for _, item := range lst.Items {
 		if lst.match(obj, item.Resource) {
-			if edge == nil || (
-				item.Edge != nil &&
+			if edge == nil || (item.Edge != nil &&
 				item.Edge.Resource != nil &&
 				lst.match(edge, item.Edge.Resource)) {
 				return item

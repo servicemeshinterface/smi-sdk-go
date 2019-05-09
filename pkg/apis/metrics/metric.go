@@ -1,6 +1,8 @@
 package metrics
 
 import (
+	"fmt"
+
 	apiresource "k8s.io/apimachinery/pkg/api/resource"
 )
 
@@ -49,4 +51,9 @@ type Metric struct {
 func (m *Metric) Set(val float64) {
 	m.Value = apiresource.NewMilliQuantity(
 		int64(val*1000), apiresource.DecimalSI)
+}
+
+// String returns a formatted string representation of this struct
+func (m *Metric) String() string {
+	return fmt.Sprintf("%#v", m)
 }

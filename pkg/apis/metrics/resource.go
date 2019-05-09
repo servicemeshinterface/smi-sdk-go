@@ -1,6 +1,7 @@
 package metrics
 
 import (
+	"fmt"
 	"path"
 
 	v1 "k8s.io/api/core/v1"
@@ -80,4 +81,9 @@ func (t *TrafficMetrics) Get(name string) *Metric {
 	}
 
 	return nil
+}
+
+// String returns a formatted string representation of this struct
+func (t *TrafficMetrics) String() string {
+	return fmt.Sprintf("%#v", t)
 }
