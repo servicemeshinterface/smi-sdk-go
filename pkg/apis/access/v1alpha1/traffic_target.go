@@ -33,11 +33,11 @@ type TrafficTarget struct {
 	// Selector is the pod or group of pods to allow ingress traffic
 	Destination IdentityBindingSubject `json:"destination,omitempty" protobuf:"bytes,3,opt,name=destination"`
 
-	// Rules are the traffic rules to allow (HTTPRoutes | TCPRoute),
-	Specs []TrafficTargetSpec `json:"specs,omitempty" protobuf:"bytes,4,opt,name=specs"`
-
 	// Sources are the pod or group of pods to allow ingress traffic
-	Sources []IdentityBindingSubject `json:"sources,omitempty" protobuf:"bytes,3,opt,name=sources"`
+	Sources []IdentityBindingSubject `json:"sources,omitempty" protobuf:"bytes,4,opt,name=sources"`
+
+	// Rules are the traffic rules to allow (HTTPRoutes | TCPRoute),
+	Specs []TrafficTargetSpec `json:"specs,omitempty" protobuf:"bytes,5,opt,name=specs"`
 }
 
 // TrafficTargetSpec is the TrafficSpec to allow for a TrafficTarget

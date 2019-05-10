@@ -44,17 +44,17 @@ func (in *TrafficTarget) DeepCopyInto(out *TrafficTarget) {
 	out.TypeMeta = in.TypeMeta
 	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
 	out.Destination = in.Destination
+	if in.Sources != nil {
+		in, out := &in.Sources, &out.Sources
+		*out = make([]IdentityBindingSubject, len(*in))
+		copy(*out, *in)
+	}
 	if in.Specs != nil {
 		in, out := &in.Specs, &out.Specs
 		*out = make([]TrafficTargetSpec, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
-	}
-	if in.Sources != nil {
-		in, out := &in.Sources, &out.Sources
-		*out = make([]IdentityBindingSubject, len(*in))
-		copy(*out, *in)
 	}
 	return
 }
