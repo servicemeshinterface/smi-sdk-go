@@ -26,14 +26,6 @@ type FakeAccessV1alpha1 struct {
 	*testing.Fake
 }
 
-func (c *FakeAccessV1alpha1) ClusterTrafficTargets(namespace string) v1alpha1.ClusterTrafficTargetInterface {
-	return &FakeClusterTrafficTargets{c, namespace}
-}
-
-func (c *FakeAccessV1alpha1) IdentityBindings(namespace string) v1alpha1.IdentityBindingInterface {
-	return &FakeIdentityBindings{c, namespace}
-}
-
 func (c *FakeAccessV1alpha1) TrafficTargets(namespace string) v1alpha1.TrafficTargetInterface {
 	return &FakeTrafficTargets{c, namespace}
 }
