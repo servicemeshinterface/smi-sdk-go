@@ -97,3 +97,13 @@ type TrafficTargetList struct {
 
 	Items []TrafficTarget `json:"items"`
 }
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// ClusterTrafficTargetList satisfy K8s code gen requirements
+type ClusterTrafficTargetList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata"`
+
+	Items []ClusterTrafficTarget `json:"items"`
+}
