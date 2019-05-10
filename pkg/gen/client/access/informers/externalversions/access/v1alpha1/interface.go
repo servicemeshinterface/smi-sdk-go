@@ -22,6 +22,8 @@ import (
 
 // Interface provides access to all the informers in this group version.
 type Interface interface {
+	// ClusterTrafficTargets returns a ClusterTrafficTargetInformer.
+	ClusterTrafficTargets() ClusterTrafficTargetInformer
 	// IdentityBindings returns a IdentityBindingInformer.
 	IdentityBindings() IdentityBindingInformer
 	// TrafficTargets returns a TrafficTargetInformer.
@@ -37,6 +39,11 @@ type version struct {
 // New returns a new Interface.
 func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakListOptions internalinterfaces.TweakListOptionsFunc) Interface {
 	return &version{factory: f, namespace: namespace, tweakListOptions: tweakListOptions}
+}
+
+// ClusterTrafficTargets returns a ClusterTrafficTargetInformer.
+func (v *version) ClusterTrafficTargets() ClusterTrafficTargetInformer {
+	return &clusterTrafficTargetInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // IdentityBindings returns a IdentityBindingInformer.

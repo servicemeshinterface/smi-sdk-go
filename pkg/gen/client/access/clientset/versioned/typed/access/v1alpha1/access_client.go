@@ -24,6 +24,7 @@ import (
 
 type AccessV1alpha1Interface interface {
 	RESTClient() rest.Interface
+	ClusterTrafficTargetsGetter
 	IdentityBindingsGetter
 	TrafficTargetsGetter
 }
@@ -31,6 +32,10 @@ type AccessV1alpha1Interface interface {
 // AccessV1alpha1Client is used to interact with features provided by the access.smispec.io group.
 type AccessV1alpha1Client struct {
 	restClient rest.Interface
+}
+
+func (c *AccessV1alpha1Client) ClusterTrafficTargets(namespace string) ClusterTrafficTargetInterface {
+	return newClusterTrafficTargets(c, namespace)
 }
 
 func (c *AccessV1alpha1Client) IdentityBindings(namespace string) IdentityBindingInterface {
