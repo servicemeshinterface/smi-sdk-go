@@ -31,21 +31,21 @@ type TrafficTarget struct {
 	Status Status `json:"status,omitempty" protobuf:"bytes,2,opt,name=status"`
 
 	// Selector is the pod or group of pods to allow ingress traffic
-	Destination IdentityBindingSubject `json:"destination,omitempty" protobuf:"bytes,3,opt,name=destination"`
+	Destination IdentityBindingSubject `json:"destination" protobuf:"bytes,3,name=destination"`
 
 	// Sources are the pod or group of pods to allow ingress traffic
-	Sources []IdentityBindingSubject `json:"sources,omitempty" protobuf:"bytes,4,opt,name=sources"`
+	Sources []IdentityBindingSubject `json:"sources" protobuf:"bytes,4,name=sources"`
 
 	// Rules are the traffic rules to allow (HTTPRoutes | TCPRoute),
-	Specs []TrafficTargetSpec `json:"specs,omitempty" protobuf:"bytes,5,opt,name=specs"`
+	Specs []TrafficTargetSpec `json:"specs" protobuf:"bytes,5,name=specs"`
 }
 
 // TrafficTargetSpec is the TrafficSpec to allow for a TrafficTarget
 type TrafficTargetSpec struct {
 	// Kind is the kind of TrafficSpec to allow
-	Kind string `json:"kind,omitempty" protobuf:"bytes,1,opt,name=kind"`
+	Kind string `json:"kind" protobuf:"bytes,1,name=kind"`
 	// Name of the TrafficSpec to use
-	Name string `json:"name,omitempty" protobuf:"bytes,2,opt,name=name"`
+	Name string `json:"name" protobuf:"bytes,2,name=name"`
 	// Matches is a list of TrafficSpec routes to allow traffic for
 	Matches []string `json:"matches,omitempty" protobuf:"bytes,3,opt,name=matches"`
 }
@@ -53,11 +53,13 @@ type TrafficTargetSpec struct {
 // IdentityBindingSubject is a Kubernetes objects which should be allowed access to the TrafficTarget
 type IdentityBindingSubject struct {
 	// Kind is the type of Subject to allow ingress (ServiceAccount | Group)
-	Kind string `json:"kind,omitempty" protobuf:"bytes,1,opt,name=kind"`
+	Kind string `json:"kind" protobuf:"bytes,1,name=kind"`
 	// Name of the Subject, i.e. ServiceAccountName
-	Name string `json:"name,omitempty" protobuf:"bytes,2,opt,name=name"`
+	Name string `json:"name" protobuf:"bytes,2,name=name"`
 	// Namespace where the Subject is deployed
 	Namespace string `json:"namespace,omitempty" protobuf:"bytes,3,opt,name=namespace"`
+	// Port defines a TCP port to apply the TrafficTarget to
+	Port string `json:"port,omitempty" protobuf:"bytes,4,opt,name=port"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
