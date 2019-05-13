@@ -16,14 +16,6 @@ limitations under the License.
 
 package v1alpha1
 
-// IdentityBindingListerExpansion allows custom methods to be added to
-// IdentityBindingLister.
-type IdentityBindingListerExpansion interface{}
-
-// IdentityBindingNamespaceListerExpansion allows custom methods to be added to
-// IdentityBindingNamespaceLister.
-type IdentityBindingNamespaceListerExpansion interface{}
-
 // TrafficTargetListerExpansion allows custom methods to be added to
 // TrafficTargetLister.
 type TrafficTargetListerExpansion interface{}

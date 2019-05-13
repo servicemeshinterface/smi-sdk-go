@@ -51,8 +51,6 @@ func (f *genericInformer) Lister() cache.GenericLister {
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
 	// Group=access.smispec.io, Version=v1alpha1
-	case v1alpha1.SchemeGroupVersion.WithResource("identitybindings"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Access().V1alpha1().IdentityBindings().Informer()}, nil
 	case v1alpha1.SchemeGroupVersion.WithResource("traffictargets"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Access().V1alpha1().TrafficTargets().Informer()}, nil
 
