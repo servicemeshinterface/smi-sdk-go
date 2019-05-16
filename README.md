@@ -36,3 +36,7 @@ The code-generator does not support groupNames with hyphen characters.
 Therefore, before running the code generator, you must rename all instances of
 "smi-spec.io" in the project to "smispec.io".  The `update-codegen.sh` script
 will rename these back to "smi-spec.io" after code generation is complete.
+
+## Contributing
+
+Please refer to [CONTRIBUTING.md](./CONTRIBUTING.md) for more information on contributing to the specification.
