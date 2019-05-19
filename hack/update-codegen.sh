@@ -42,6 +42,7 @@ function generate_client() {
   # smispec.io as the group name, then replace it with smi-spec.io after code
   # generation.
   find "${ROOT_DIR}/pkg/apis/${CUSTOM_RESOURCE_NAME}" -type f -exec sed -i 's/smispec.io/smi-spec.io/g' {} +
+  find "${ROOT_DIR}/pkg/gen/client/${CUSTOM_RESOURCE_NAME}" -type f -exec sed -i 's/smispec.io/smi-spec.io/g' {} +
 }
 
 echo "###### Generating Traffic Split Client ######"

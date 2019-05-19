@@ -28,7 +28,7 @@ type SpecsV1alpha1Interface interface {
 	TCPRoutesGetter
 }
 
-// SpecsV1alpha1Client is used to interact with features provided by the specs.smispec.io group.
+// SpecsV1alpha1Client is used to interact with features provided by the specs.smi-spec.io group.
 type SpecsV1alpha1Client struct {
 	restClient rest.Interface
 }
