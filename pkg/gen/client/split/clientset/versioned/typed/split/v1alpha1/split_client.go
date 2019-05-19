@@ -27,7 +27,7 @@ type SmispecV1alpha1Interface interface {
 	TrafficSplitsGetter
 }
 
-// SmispecV1alpha1Client is used to interact with features provided by the smispec.io group.
+// SmispecV1alpha1Client is used to interact with features provided by the smi-spec.io group.
 type SmispecV1alpha1Client struct {
 	restClient rest.Interface
 }

@@ -32,9 +32,9 @@ type FakeHTTPRouteGroups struct {
 	ns   string
 }
 
-var httproutegroupsResource = schema.GroupVersionResource{Group: "specs.smispec.io", Version: "v1alpha1", Resource: "httproutegroups"}
+var httproutegroupsResource = schema.GroupVersionResource{Group: "specs.smi-spec.io", Version: "v1alpha1", Resource: "httproutegroups"}
 
-var httproutegroupsKind = schema.GroupVersionKind{Group: "specs.smispec.io", Version: "v1alpha1", Kind: "HTTPRouteGroup"}
+var httproutegroupsKind = schema.GroupVersionKind{Group: "specs.smi-spec.io", Version: "v1alpha1", Kind: "HTTPRouteGroup"}
 
 // Get takes name of the hTTPRouteGroup, and returns the corresponding hTTPRouteGroup object, and an error if there is any.
 func (c *FakeHTTPRouteGroups) Get(name string, options v1.GetOptions) (result *v1alpha1.HTTPRouteGroup, err error) {

@@ -32,9 +32,9 @@ type FakeTCPRoutes struct {
 	ns   string
 }
 
-var tcproutesResource = schema.GroupVersionResource{Group: "specs.smispec.io", Version: "v1alpha1", Resource: "tcproutes"}
+var tcproutesResource = schema.GroupVersionResource{Group: "specs.smi-spec.io", Version: "v1alpha1", Resource: "tcproutes"}
 
-var tcproutesKind = schema.GroupVersionKind{Group: "specs.smispec.io", Version: "v1alpha1", Kind: "TCPRoute"}
+var tcproutesKind = schema.GroupVersionKind{Group: "specs.smi-spec.io", Version: "v1alpha1", Kind: "TCPRoute"}
 
 // Get takes name of the tCPRoute, and returns the corresponding tCPRoute object, and an error if there is any.
 func (c *FakeTCPRoutes) Get(name string, options v1.GetOptions) (result *v1alpha1.TCPRoute, err error) {

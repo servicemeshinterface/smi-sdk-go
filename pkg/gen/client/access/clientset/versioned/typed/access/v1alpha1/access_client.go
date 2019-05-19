@@ -27,7 +27,7 @@ type AccessV1alpha1Interface interface {
 	TrafficTargetsGetter
 }
 
-// AccessV1alpha1Client is used to interact with features provided by the access.smispec.io group.
+// AccessV1alpha1Client is used to interact with features provided by the access.smi-spec.io group.
 type AccessV1alpha1Client struct {
 	restClient rest.Interface
 }
