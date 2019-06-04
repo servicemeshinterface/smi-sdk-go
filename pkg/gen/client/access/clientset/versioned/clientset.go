@@ -26,6 +26,8 @@ import (
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
 	AccessV1alpha1() accessv1alpha1.AccessV1alpha1Interface
+	// Deprecated: please explicitly pick a version if possible.
+	Access() accessv1alpha1.AccessV1alpha1Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
@@ -37,6 +39,12 @@ type Clientset struct {
 
 // AccessV1alpha1 retrieves the AccessV1alpha1Client
 func (c *Clientset) AccessV1alpha1() accessv1alpha1.AccessV1alpha1Interface {
+	return c.accessV1alpha1
+}
+
+// Deprecated: Access retrieves the default version of AccessClient.
+// Please explicitly pick a version.
+func (c *Clientset) Access() accessv1alpha1.AccessV1alpha1Interface {
 	return c.accessV1alpha1
 }
 

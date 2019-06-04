@@ -26,6 +26,8 @@ import (
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
 	SpecsV1alpha1() specsv1alpha1.SpecsV1alpha1Interface
+	// Deprecated: please explicitly pick a version if possible.
+	Specs() specsv1alpha1.SpecsV1alpha1Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
@@ -37,6 +39,12 @@ type Clientset struct {
 
 // SpecsV1alpha1 retrieves the SpecsV1alpha1Client
 func (c *Clientset) SpecsV1alpha1() specsv1alpha1.SpecsV1alpha1Interface {
+	return c.specsV1alpha1
+}
+
+// Deprecated: Specs retrieves the default version of SpecsClient.
+// Please explicitly pick a version.
+func (c *Clientset) Specs() specsv1alpha1.SpecsV1alpha1Interface {
 	return c.specsV1alpha1
 }
 
