@@ -18,8 +18,8 @@ package fake
 
 import (
 	clientset "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned"
-	smispecv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha1"
-	fakesmispecv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha1/fake"
+	splitv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha1"
+	fakesplitv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -69,12 +69,12 @@ func (c *Clientset) Discovery() discovery.DiscoveryInterface {
 
 var _ clientset.Interface = &Clientset{}
 
-// SmispecV1alpha1 retrieves the SmispecV1alpha1Client
-func (c *Clientset) SmispecV1alpha1() smispecv1alpha1.SmispecV1alpha1Interface {
-	return &fakesmispecv1alpha1.FakeSmispecV1alpha1{Fake: &c.Fake}
+// SplitV1alpha1 retrieves the SplitV1alpha1Client
+func (c *Clientset) SplitV1alpha1() splitv1alpha1.SplitV1alpha1Interface {
+	return &fakesplitv1alpha1.FakeSplitV1alpha1{Fake: &c.Fake}
 }
 
-// Smispec retrieves the SmispecV1alpha1Client
-func (c *Clientset) Smispec() smispecv1alpha1.SmispecV1alpha1Interface {
-	return &fakesmispecv1alpha1.FakeSmispecV1alpha1{Fake: &c.Fake}
+// Split retrieves the SplitV1alpha1Client
+func (c *Clientset) Split() splitv1alpha1.SplitV1alpha1Interface {
+	return &fakesplitv1alpha1.FakeSplitV1alpha1{Fake: &c.Fake}
 }

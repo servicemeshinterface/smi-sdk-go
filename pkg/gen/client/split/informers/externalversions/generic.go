@@ -50,9 +50,9 @@ func (f *genericInformer) Lister() cache.GenericLister {
 // TODO extend this to unknown resources with a client pool
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
-	// Group=smi-spec.io, Version=v1alpha1
+	// Group=split.smi-spec.io, Version=v1alpha1
 	case v1alpha1.SchemeGroupVersion.WithResource("trafficsplits"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Smispec().V1alpha1().TrafficSplits().Informer()}, nil
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Split().V1alpha1().TrafficSplits().Informer()}, nil
 
 	}
 

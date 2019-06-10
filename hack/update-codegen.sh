@@ -31,7 +31,7 @@ function generate_client() {
   # --output-base    because this script should also be able to run inside the vendor dir of
   #                  k8s.io/kubernetes. The output-base is needed for the generators to output into the vendor dir
   #                  instead of the $GOPATH directly. For normal projects this can be dropped.
-  "${CODEGEN_PKG}"/generate-groups.sh \
+  GO111MODULE="on" "${CODEGEN_PKG}"/generate-groups.sh \
     "deepcopy,client,informer,lister" \
     "$ROOT_PACKAGE/pkg/gen/client/$CUSTOM_RESOURCE_NAME" \
     "$ROOT_PACKAGE/pkg/apis" \
