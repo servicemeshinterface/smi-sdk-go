@@ -23,22 +23,22 @@ import (
 	rest "k8s.io/client-go/rest"
 )
 
-type SmispecV1alpha1Interface interface {
+type SplitV1alpha1Interface interface {
 	RESTClient() rest.Interface
 	TrafficSplitsGetter
 }
 
-// SmispecV1alpha1Client is used to interact with features provided by the smi-spec.io group.
-type SmispecV1alpha1Client struct {
+// SplitV1alpha1Client is used to interact with features provided by the split.smi-spec.io group.
+type SplitV1alpha1Client struct {
 	restClient rest.Interface
 }
 
-func (c *SmispecV1alpha1Client) TrafficSplits(namespace string) TrafficSplitInterface {
+func (c *SplitV1alpha1Client) TrafficSplits(namespace string) TrafficSplitInterface {
 	return newTrafficSplits(c, namespace)
 }
 
-// NewForConfig creates a new SmispecV1alpha1Client for the given config.
-func NewForConfig(c *rest.Config) (*SmispecV1alpha1Client, error) {
+// NewForConfig creates a new SplitV1alpha1Client for the given config.
+func NewForConfig(c *rest.Config) (*SplitV1alpha1Client, error) {
 	config := *c
 	if err := setConfigDefaults(&config); err != nil {
 		return nil, err
@@ -47,12 +47,12 @@ func NewForConfig(c *rest.Config) (*SmispecV1alpha1Client, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &SmispecV1alpha1Client{client}, nil
+	return &SplitV1alpha1Client{client}, nil
 }
 
-// NewForConfigOrDie creates a new SmispecV1alpha1Client for the given config and
+// NewForConfigOrDie creates a new SplitV1alpha1Client for the given config and
 // panics if there is an error in the config.
-func NewForConfigOrDie(c *rest.Config) *SmispecV1alpha1Client {
+func NewForConfigOrDie(c *rest.Config) *SplitV1alpha1Client {
 	client, err := NewForConfig(c)
 	if err != nil {
 		panic(err)
@@ -60,9 +60,9 @@ func NewForConfigOrDie(c *rest.Config) *SmispecV1alpha1Client {
 	return client
 }
 
-// New creates a new SmispecV1alpha1Client for the given RESTClient.
-func New(c rest.Interface) *SmispecV1alpha1Client {
-	return &SmispecV1alpha1Client{c}
+// New creates a new SplitV1alpha1Client for the given RESTClient.
+func New(c rest.Interface) *SplitV1alpha1Client {
+	return &SplitV1alpha1Client{c}
 }
 
 func setConfigDefaults(config *rest.Config) error {
@@ -80,7 +80,7 @@ func setConfigDefaults(config *rest.Config) error {
 
 // RESTClient returns a RESTClient that is used to communicate
 // with API server by this client implementation.
-func (c *SmispecV1alpha1Client) RESTClient() rest.Interface {
+func (c *SplitV1alpha1Client) RESTClient() rest.Interface {
 	if c == nil {
 		return nil
 	}

@@ -53,7 +53,7 @@ type trafficSplits struct {
 }
 
 // newTrafficSplits returns a TrafficSplits
-func newTrafficSplits(c *SmispecV1alpha1Client, namespace string) *trafficSplits {
+func newTrafficSplits(c *SplitV1alpha1Client, namespace string) *trafficSplits {
 	return &trafficSplits{
 		client: c.RESTClient(),
 		ns:     namespace,

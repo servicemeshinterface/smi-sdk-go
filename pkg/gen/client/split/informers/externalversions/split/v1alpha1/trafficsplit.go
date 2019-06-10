@@ -59,13 +59,13 @@ func NewFilteredTrafficSplitInformer(client versioned.Interface, namespace strin
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.SmispecV1alpha1().TrafficSplits(namespace).List(options)
+				return client.SplitV1alpha1().TrafficSplits(namespace).List(options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.SmispecV1alpha1().TrafficSplits(namespace).Watch(options)
+				return client.SplitV1alpha1().TrafficSplits(namespace).Watch(options)
 			},
 		},
 		&splitv1alpha1.TrafficSplit{},

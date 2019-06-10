@@ -28,13 +28,13 @@ import (
 
 // FakeTrafficSplits implements TrafficSplitInterface
 type FakeTrafficSplits struct {
-	Fake *FakeSmispecV1alpha1
+	Fake *FakeSplitV1alpha1
 	ns   string
 }
 
-var trafficsplitsResource = schema.GroupVersionResource{Group: "smi-spec.io", Version: "v1alpha1", Resource: "trafficsplits"}
+var trafficsplitsResource = schema.GroupVersionResource{Group: "split.smi-spec.io", Version: "v1alpha1", Resource: "trafficsplits"}
 
-var trafficsplitsKind = schema.GroupVersionKind{Group: "smi-spec.io", Version: "v1alpha1", Kind: "TrafficSplit"}
+var trafficsplitsKind = schema.GroupVersionKind{Group: "split.smi-spec.io", Version: "v1alpha1", Kind: "TrafficSplit"}
 
 // Get takes name of the trafficSplit, and returns the corresponding trafficSplit object, and an error if there is any.
 func (c *FakeTrafficSplits) Get(name string, options v1.GetOptions) (result *v1alpha1.TrafficSplit, err error) {

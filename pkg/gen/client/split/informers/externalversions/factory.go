@@ -170,9 +170,9 @@ type SharedInformerFactory interface {
 	ForResource(resource schema.GroupVersionResource) (GenericInformer, error)
 	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
 
-	Smispec() split.Interface
+	Split() split.Interface
 }
 
-func (f *sharedInformerFactory) Smispec() split.Interface {
+func (f *sharedInformerFactory) Split() split.Interface {
 	return split.New(f, f.namespace, f.tweakListOptions)
 }
