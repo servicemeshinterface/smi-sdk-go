@@ -2,7 +2,7 @@
 
 Shared code and example implementations for [SMI Spec](https://github.com/deislabs/smi-spec)
 
-## API 
+## API
 
 API objects are found at the following locations:
 
@@ -31,7 +31,8 @@ To regenerate the client code, follow these steps:
 1. Ensure the group name does not contain any hypen characters (see note below)
 1. Run `hack/update-codegen.sh`
 
-#### Note: 
+#### Note
+
 The code-generator does not support groupNames with hyphen characters.
 Therefore, before running the code generator, you must rename all instances of
 "smi-spec.io" in the project to "smispec.io".  The `update-codegen.sh` script
