@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.12.7
+   
+    environment:
+      GO111MODULE: "on"
+    
+    working_directory: /go/src/github.com/deislabs/smi-sdk-go
+    
+    steps:
+      - checkout
+
+      - run: 
+          name: install code generation
+          command: go get ./... 
+
+      - run: 
+          name: execute code generation
+          command: cd ./hack && ./update_codegen.sh
+
+workflows:
+  version: 2
+  build-and-release:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
