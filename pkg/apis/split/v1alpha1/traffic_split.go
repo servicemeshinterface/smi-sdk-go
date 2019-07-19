@@ -25,13 +25,13 @@ type TrafficSplit struct {
 	// +optional
 	Spec TrafficSplitSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
-	// Most recently observed status of the pod.
+	// Most recently observed status of the TrafficSplit.
 	// This data may not be up to date.
 	// Populated by the system.
 	// Read-only.
 	// More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status
 	// +optional
-	//Status Status `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
+	Status Status `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 // TrafficSplitSpec is the specification for a TrafficSplit
@@ -48,6 +48,7 @@ type TrafficSplitBackend struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+// TrafficSplitList statisfy K8s code gen requirements
 type TrafficSplitList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata"`
