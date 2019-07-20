@@ -22,7 +22,7 @@ jobs:
 
       - run: 
           name: Execute code generation
-          command: cd ./hack/update_codegen.sh
+          command: cd ./hack/update-codegen.sh
 
 workflows:
   version: 2
