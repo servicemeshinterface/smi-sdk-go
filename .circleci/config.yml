@@ -13,11 +13,11 @@ jobs:
       - checkout
 
       - run: 
-          name: install code generation
+          name: Install code generation
           command: go get ./... 
 
       - run: 
-          name: execute code generation
+          name: Execute code generation
           command: cd ./hack && ./update_codegen.sh
 
 workflows:
