@@ -10,7 +10,7 @@ CUSTOM_RESOURCE_VERSION="v1alpha1"
 
 SCRIPT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ROOT_DIR="$( cd $SCRIPT_ROOT/.. && pwd )"
-GEN_VER=$( awk '/k8s.io\/code-generator/ { print $2 }' "$ROOT_DIR/go.mod" )
+GEN_VER=$( awk '/k8s.io\/code-generator => k8s.io\/code-generator/ { print $4 }' "$ROOT_DIR/go.mod" )
 CODEGEN_PKG=${GOPATH}/pkg/mod/k8s.io/code-generator@${GEN_VER}
 
 function generate_client() {

@@ -13,12 +13,16 @@ jobs:
       - checkout
 
       - run: 
-          name: Install code generation
+          name: Install modules
           command: go get ./... 
+      
+      - run: 
+          name: Build installer
+          command: go build ./cmd/installer/installer.go
 
       - run: 
           name: Execute code generation
-          command: cd ./hack && ./update_codegen.sh
+          command: cd ./hack/update_codegen.sh
 
 workflows:
   version: 2
