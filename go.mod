@@ -16,17 +16,16 @@ require (
 	github.com/kubernetes-client/go v0.0.0-20190516163813-075b33afc74f
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/peterbourgon/diskv v2.0.1+incompatible // indirect
-	github.com/spf13/pflag v1.0.1 // indirect
 	github.com/stretchr/testify v1.3.0
 	golang.org/x/net v0.0.0-20190503192946-f4e77d36d62c // indirect
 	golang.org/x/oauth2 v0.0.0-20190402181905-9f3314589c9a // indirect
-	golang.org/x/sys v0.0.0-20190312061237-fead79001313 // indirect
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.2.2
 	k8s.io/api v0.0.0-20181213150558-05914d821849
 	k8s.io/apimachinery v0.0.0-20181127025237-2b1284ed4c93
 	k8s.io/client-go v0.0.0-20181213151034-8d9ed539ba31
+	k8s.io/code-generator v0.0.0-20181114232248-ae218e241252
 	k8s.io/klog v0.3.2 // indirect
 	k8s.io/kube-openapi v0.0.0-20190502190224-411b2483e503 // indirect
 	sigs.k8s.io/yaml v1.1.0 // indirect
