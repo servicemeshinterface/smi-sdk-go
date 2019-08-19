@@ -9,10 +9,15 @@ spec:
   scope: Namespaced
   names:
     kind: TrafficSplit
+    listKind: TrafficSplitList
     shortNames:
-      - ts
+    - ts
     plural: trafficsplits
     singular: trafficsplit
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
   additionalPrinterColumns:
   - name: Service
     type: string
