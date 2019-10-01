@@ -5,7 +5,7 @@ metadata:
   name: trafficsplits.split.smi-spec.io
 spec:
   group: split.smi-spec.io
-  version: v1alpha1
+  version: v1alpha2
   scope: Namespaced
   names:
     kind: TrafficSplit
@@ -15,7 +15,7 @@ spec:
     plural: trafficsplits
     singular: trafficsplit
   versions:
-  - name: v1alpha1
+  - name: v1alpha2
     served: true
     storage: true
   additionalPrinterColumns:
