@@ -17,7 +17,7 @@ limitations under the License.
 package versioned
 
 import (
-	splitv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha1"
+	splitv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha2"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -25,27 +25,19 @@ import (
 
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
-	SplitV1alpha1() splitv1alpha1.SplitV1alpha1Interface
-	// Deprecated: please explicitly pick a version if possible.
-	Split() splitv1alpha1.SplitV1alpha1Interface
+	SplitV1alpha2() splitv1alpha2.SplitV1alpha2Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
 // version included in a Clientset.
 type Clientset struct {
 	*discovery.DiscoveryClient
-	splitV1alpha1 *splitv1alpha1.SplitV1alpha1Client
+	splitV1alpha2 *splitv1alpha2.SplitV1alpha2Client
 }
 
-// SplitV1alpha1 retrieves the SplitV1alpha1Client
-func (c *Clientset) SplitV1alpha1() splitv1alpha1.SplitV1alpha1Interface {
-	return c.splitV1alpha1
-}
-
-// Deprecated: Split retrieves the default version of SplitClient.
-// Please explicitly pick a version.
-func (c *Clientset) Split() splitv1alpha1.SplitV1alpha1Interface {
-	return c.splitV1alpha1
+// SplitV1alpha2 retrieves the SplitV1alpha2Client
+func (c *Clientset) SplitV1alpha2() splitv1alpha2.SplitV1alpha2Interface {
+	return c.splitV1alpha2
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -64,7 +56,7 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	}
 	var cs Clientset
 	var err error
-	cs.splitV1alpha1, err = splitv1alpha1.NewForConfig(&configShallowCopy)
+	cs.splitV1alpha2, err = splitv1alpha2.NewForConfig(&configShallowCopy)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +72,7 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 // panics if there is an error in the config.
 func NewForConfigOrDie(c *rest.Config) *Clientset {
 	var cs Clientset
-	cs.splitV1alpha1 = splitv1alpha1.NewForConfigOrDie(c)
+	cs.splitV1alpha2 = splitv1alpha2.NewForConfigOrDie(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClientForConfigOrDie(c)
 	return &cs
@@ -89,7 +81,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 // New creates a new Clientset for the given RESTClient.
 func New(c rest.Interface) *Clientset {
 	var cs Clientset
-	cs.splitV1alpha1 = splitv1alpha1.New(c)
+	cs.splitV1alpha2 = splitv1alpha2.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs
