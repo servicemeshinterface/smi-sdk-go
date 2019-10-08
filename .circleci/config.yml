@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.12
+    working_directory: /go/src/github.com/deislabs/smi-sdk-go
+    environment:
+      - GO111MODULE: "on"
+    steps:
+      - checkout
+      - run: make bootstrap
+      - run: make test
