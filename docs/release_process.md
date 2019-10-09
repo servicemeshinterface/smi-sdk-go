@@ -13,7 +13,8 @@ $ git push origin v0.x.0
 ```
 2. Then, generate all assets to upload with the git release:
 ```console
-$ make dist
+$ git checkout tags/v0.x.0
+$ make dist checksum
 ```
 
 3. Last, visit the [releases page](https://github.com/deislabs/smi-sdk-go/releases) to `Draft a new release` using the tag you just created and pushed. Be sure to include release notes on what changes are included in the release and upload the assets created in the previous step.
