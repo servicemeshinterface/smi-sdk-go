@@ -1,6 +1,6 @@
 module github.com/deislabs/smi-sdk-go
 
-go 1.12
+go 1.13.1
 
 require (
 	github.com/Azure/go-autorest/autorest/adal v0.1.0 // indirect
