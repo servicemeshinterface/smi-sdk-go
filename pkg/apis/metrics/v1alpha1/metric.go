@@ -1,4 +1,4 @@
-package metrics
+package v1alpha1
 
 import (
 	"fmt"

@@ -1,4 +1,4 @@
-package metrics
+package v1alpha1
 
 import (
 	"fmt"
@@ -7,6 +7,8 @@ import (
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // TrafficMetricsList provides a list of resources associated with a specific reference
 type TrafficMetricsList struct {
