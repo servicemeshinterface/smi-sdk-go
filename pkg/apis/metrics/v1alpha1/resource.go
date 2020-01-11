@@ -1,4 +1,4 @@
-package metrics
+package v1alpha1
 
 import (
 	"fmt"
@@ -59,6 +59,10 @@ func NewTrafficMetrics(obj, edge *v1.ObjectReference) *TrafficMetrics {
 
 	return resource
 }
+
+// +genclient
+// +genclient:noStatus
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // TrafficMetrics provide the metrics for a specific resource
 type TrafficMetrics struct {
