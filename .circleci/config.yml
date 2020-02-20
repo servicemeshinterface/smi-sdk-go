@@ -8,3 +8,4 @@ jobs:
       - checkout
       - run: make bootstrap
       - run: make test
+      - run: make verify
