@@ -32,9 +32,9 @@ type FakeTrafficMetricses struct {
 	ns   string
 }
 
-var trafficmetricsesResource = schema.GroupVersionResource{Group: "metrics.smispec.io", Version: "v1alpha1", Resource: "trafficmetricses"}
+var trafficmetricsesResource = schema.GroupVersionResource{Group: "metrics.smi-spec.io", Version: "v1alpha1", Resource: "trafficmetricses"}
 
-var trafficmetricsesKind = schema.GroupVersionKind{Group: "metrics.smispec.io", Version: "v1alpha1", Kind: "TrafficMetrics"}
+var trafficmetricsesKind = schema.GroupVersionKind{Group: "metrics.smi-spec.io", Version: "v1alpha1", Kind: "TrafficMetrics"}
 
 // Get takes name of the trafficMetrics, and returns the corresponding trafficMetrics object, and an error if there is any.
 func (c *FakeTrafficMetricses) Get(name string, options v1.GetOptions) (result *v1alpha1.TrafficMetrics, err error) {

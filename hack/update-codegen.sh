@@ -5,9 +5,6 @@ set -eu
 # ROOT_PACKAGE :: the package (relative to $GOPATH/src) that is the target for code generation
 ROOT_PACKAGE="github.com/deislabs/smi-sdk-go"
 
-# CUSTOM_RESOURCE_VERSION :: the version of the resource
-CUSTOM_RESOURCE_VERSION="v1alpha1"
-
 function generate_client() {
   
   SCRIPT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -17,6 +14,7 @@ function generate_client() {
   
   # CUSTOM_RESOURCE_NAME :: the name of the custom resource that we're generating client code for
   CUSTOM_RESOURCE_NAME=$1
+  CUSTOM_RESOURCE_VERSION=$2
 
   # make the generate script executable
   chmod +x ${CODEGEN_PKG}/generate-groups.sh
@@ -24,9 +22,13 @@ function generate_client() {
   # delete the generated code as this is additive, removed objects will not be cleaned
   rm -f ${ROOT_DIR}/pkg/apis/${CUSTOM_RESOURCE_NAME}/${CUSTOM_RESOURCE_VERSION}/zz_generated.deepcopy.go
   rm -rf ${ROOT_DIR}/pkg/gen/client/${CUSTOM_RESOURCE_NAME}
-  
-  find "${ROOT_DIR}/pkg/apis/${CUSTOM_RESOURCE_NAME}" -type f -exec sed -i 's/smi-spec.io/smispec.io/g' {} +
-  
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    find "${ROOT_DIR}/pkg/apis/${CUSTOM_RESOURCE_NAME}" -type f -exec sed -i '' 's/smi-spec.io/smispec.io/g' {} +
+  else
+    find "${ROOT_DIR}/pkg/apis/${CUSTOM_RESOURCE_NAME}" -type f -exec sed -i 's/smi-spec.io/smispec.io/g' {} +
+  fi
+
   # generate the code with:
   # --output-base    because this script should also be able to run inside the vendor dir of
   #                  k8s.io/kubernetes. The output-base is needed for the generators to output into the vendor dir
@@ -41,17 +43,27 @@ function generate_client() {
   # The generate-groups.sh script cannot handle group names with dashes, so we use
   # smispec.io as the group name, then replace it with smi-spec.io after code
   # generation.
-  find "${ROOT_DIR}/pkg/apis/${CUSTOM_RESOURCE_NAME}" -type f -exec sed -i 's/smispec.io/smi-spec.io/g' {} +
-  find "${ROOT_DIR}/pkg/gen/client/${CUSTOM_RESOURCE_NAME}" -type f -exec sed -i 's/smispec.io/smi-spec.io/g' {} +
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    find "${ROOT_DIR}/pkg/apis/${CUSTOM_RESOURCE_NAME}" -type f -exec sed -i '' 's/smispec.io/smi-spec.io/g' {} +
+    find "${ROOT_DIR}/pkg/gen/client/${CUSTOM_RESOURCE_NAME}" -type f -exec sed -i '' 's/smispec.io/smi-spec.io/g' {} +
+  else
+    find "${ROOT_DIR}/pkg/apis/${CUSTOM_RESOURCE_NAME}" -type f -exec sed -i 's/smispec.io/smi-spec.io/g' {} +
+    find "${ROOT_DIR}/pkg/gen/client/${CUSTOM_RESOURCE_NAME}" -type f -exec sed -i 's/smispec.io/smi-spec.io/g' {} +
+  fi
+
 }
 
-echo "###### Generating Traffic Split Client ######"
-generate_client "split"
+echo "##### Generating specs client ######"
+generate_client "specs" "v1alpha1"
 
 echo ""
-echo "##### Generating Traffic Access Client ######"
-generate_client "specs"
+echo "###### Generating split client ######"
+generate_client "split" "v1alpha2"
 
 echo ""
-echo "##### Generating Traffic Spec Client ######"
-generate_client "access"
+echo "##### Generating access client ######"
+generate_client "access" "v1alpha1"
+
+echo ""
+echo "##### Generating metrics client ######"
+generate_client "metrics" "v1alpha1"

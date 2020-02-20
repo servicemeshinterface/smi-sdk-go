@@ -80,7 +80,7 @@ func (in *HTTPRouteGroup) DeepCopyObject() runtime.Object {
 func (in *HTTPRouteGroupList) DeepCopyInto(out *HTTPRouteGroupList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]HTTPRouteGroup, len(*in))
@@ -139,7 +139,7 @@ func (in *TCPRoute) DeepCopyObject() runtime.Object {
 func (in *TCPRouteList) DeepCopyInto(out *TCPRouteList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]TCPRoute, len(*in))
