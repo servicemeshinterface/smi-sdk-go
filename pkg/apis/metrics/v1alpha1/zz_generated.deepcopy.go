@@ -139,7 +139,7 @@ func (in *TrafficMetrics) DeepCopyObject() runtime.Object {
 func (in *TrafficMetricsList) DeepCopyInto(out *TrafficMetricsList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Resource != nil {
 		in, out := &in.Resource, &out.Resource
 		*out = new(v1.ObjectReference)
