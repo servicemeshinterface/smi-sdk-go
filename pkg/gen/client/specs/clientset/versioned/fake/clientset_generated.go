@@ -20,6 +20,8 @@ import (
 	clientset "github.com/deislabs/smi-sdk-go/pkg/gen/client/specs/clientset/versioned"
 	specsv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha1"
 	fakespecsv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha1/fake"
+	specsv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha2"
+	fakespecsv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha2/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -77,4 +79,9 @@ var _ clientset.Interface = &Clientset{}
 // SpecsV1alpha1 retrieves the SpecsV1alpha1Client
 func (c *Clientset) SpecsV1alpha1() specsv1alpha1.SpecsV1alpha1Interface {
 	return &fakespecsv1alpha1.FakeSpecsV1alpha1{Fake: &c.Fake}
+}
+
+// SpecsV1alpha2 retrieves the SpecsV1alpha2Client
+func (c *Clientset) SpecsV1alpha2() specsv1alpha2.SpecsV1alpha2Interface {
+	return &fakespecsv1alpha2.FakeSpecsV1alpha2{Fake: &c.Fake}
 }
