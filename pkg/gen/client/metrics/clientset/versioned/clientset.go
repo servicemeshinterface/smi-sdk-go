@@ -20,6 +20,7 @@ import (
 	"fmt"
 
 	metricsv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha1"
+	metricsv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha2"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -28,6 +29,7 @@ import (
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
 	MetricsV1alpha1() metricsv1alpha1.MetricsV1alpha1Interface
+	MetricsV1alpha2() metricsv1alpha2.MetricsV1alpha2Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
@@ -35,11 +37,17 @@ type Interface interface {
 type Clientset struct {
 	*discovery.DiscoveryClient
 	metricsV1alpha1 *metricsv1alpha1.MetricsV1alpha1Client
+	metricsV1alpha2 *metricsv1alpha2.MetricsV1alpha2Client
 }
 
 // MetricsV1alpha1 retrieves the MetricsV1alpha1Client
 func (c *Clientset) MetricsV1alpha1() metricsv1alpha1.MetricsV1alpha1Interface {
 	return c.metricsV1alpha1
+}
+
+// MetricsV1alpha2 retrieves the MetricsV1alpha2Client
+func (c *Clientset) MetricsV1alpha2() metricsv1alpha2.MetricsV1alpha2Interface {
+	return c.metricsV1alpha2
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -67,6 +75,10 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	if err != nil {
 		return nil, err
 	}
+	cs.metricsV1alpha2, err = metricsv1alpha2.NewForConfig(&configShallowCopy)
+	if err != nil {
+		return nil, err
+	}
 
 	cs.DiscoveryClient, err = discovery.NewDiscoveryClientForConfig(&configShallowCopy)
 	if err != nil {
@@ -80,6 +92,7 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 func NewForConfigOrDie(c *rest.Config) *Clientset {
 	var cs Clientset
 	cs.metricsV1alpha1 = metricsv1alpha1.NewForConfigOrDie(c)
+	cs.metricsV1alpha2 = metricsv1alpha2.NewForConfigOrDie(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClientForConfigOrDie(c)
 	return &cs
@@ -89,6 +102,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 func New(c rest.Interface) *Clientset {
 	var cs Clientset
 	cs.metricsV1alpha1 = metricsv1alpha1.New(c)
+	cs.metricsV1alpha2 = metricsv1alpha2.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs

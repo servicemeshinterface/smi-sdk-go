@@ -69,4 +69,4 @@ generate_client "access" "v1alpha1"
 
 echo ""
 echo "##### Generating metrics client ######"
-generate_client "metrics" "v1alpha1"
+generate_client "metrics" "v1alpha1,v1alpha2"
