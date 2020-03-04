@@ -21,6 +21,7 @@ import (
 
 	splitv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha1"
 	splitv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha2"
+	splitv1alpha3 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha3"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -30,6 +31,7 @@ type Interface interface {
 	Discovery() discovery.DiscoveryInterface
 	SplitV1alpha1() splitv1alpha1.SplitV1alpha1Interface
 	SplitV1alpha2() splitv1alpha2.SplitV1alpha2Interface
+	SplitV1alpha3() splitv1alpha3.SplitV1alpha3Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
@@ -38,6 +40,7 @@ type Clientset struct {
 	*discovery.DiscoveryClient
 	splitV1alpha1 *splitv1alpha1.SplitV1alpha1Client
 	splitV1alpha2 *splitv1alpha2.SplitV1alpha2Client
+	splitV1alpha3 *splitv1alpha3.SplitV1alpha3Client
 }
 
 // SplitV1alpha1 retrieves the SplitV1alpha1Client
@@ -48,6 +51,11 @@ func (c *Clientset) SplitV1alpha1() splitv1alpha1.SplitV1alpha1Interface {
 // SplitV1alpha2 retrieves the SplitV1alpha2Client
 func (c *Clientset) SplitV1alpha2() splitv1alpha2.SplitV1alpha2Interface {
 	return c.splitV1alpha2
+}
+
+// SplitV1alpha3 retrieves the SplitV1alpha3Client
+func (c *Clientset) SplitV1alpha3() splitv1alpha3.SplitV1alpha3Interface {
+	return c.splitV1alpha3
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -79,6 +87,10 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	if err != nil {
 		return nil, err
 	}
+	cs.splitV1alpha3, err = splitv1alpha3.NewForConfig(&configShallowCopy)
+	if err != nil {
+		return nil, err
+	}
 
 	cs.DiscoveryClient, err = discovery.NewDiscoveryClientForConfig(&configShallowCopy)
 	if err != nil {
@@ -93,6 +105,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 	var cs Clientset
 	cs.splitV1alpha1 = splitv1alpha1.NewForConfigOrDie(c)
 	cs.splitV1alpha2 = splitv1alpha2.NewForConfigOrDie(c)
+	cs.splitV1alpha3 = splitv1alpha3.NewForConfigOrDie(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClientForConfigOrDie(c)
 	return &cs
@@ -103,6 +116,7 @@ func New(c rest.Interface) *Clientset {
 	var cs Clientset
 	cs.splitV1alpha1 = splitv1alpha1.New(c)
 	cs.splitV1alpha2 = splitv1alpha2.New(c)
+	cs.splitV1alpha3 = splitv1alpha3.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs
