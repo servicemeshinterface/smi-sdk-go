@@ -16,31 +16,23 @@ type HTTPRouteGroup struct {
 	// Standard object's metadata.
 	// More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
 	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
-
-	// Most recently observed status of the object.
-	// This data may not be up to date.
-	// Populated by the system.
-	// Read-only.
-	// More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status
-	// +optional
-	Status Status `json:"status,omitempty" protobuf:"bytes,2,opt,name=status"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Routes for inbound traffic
-	Matches []HTTPMatch `json:"matches,omitempty" protobuf:"bytes,3,opt,name=matches"`
+	Matches []HTTPMatch `json:"matches,omitempty"`
 }
 
 // HTTPMatch defines an individual route for HTTP traffic
 type HTTPMatch struct {
 	// Name is the name of the match for referencing in a TrafficTarget
-	Name string `json:"name,omitempty" protobuf:"bytes,1,opt,name=name"`
+	Name string `json:"name,omitempty"`
 
 	// Methods for inbound traffic as defined in RFC 7231
 	// https://tools.ietf.org/html/rfc7231#section-4
-	Methods []string `json:"methods,omitempty" protobuf:"bytes,1,opt,name=methods"`
+	Methods []string `json:"methods,omitempty"`
 
 	// PathRegex is a regular expression defining the route
-	PathRegex string `json:"pathRegex,omitempty" protobuf:"bytes,1,opt,name=pathRegex"`
+	PathRegex string `json:"pathRegex,omitempty"`
 }
 
 // HTTPRouteMethod are methods allowed by the route
