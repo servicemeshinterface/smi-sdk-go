@@ -9,6 +9,7 @@ import (
 // Direction defines whether an edge is sending traffic to a resource or
 // receiving traffic from a resource.
 type Direction string
+
 // Side defines on which side of the edge the metrics are measured.
 type Side string
 
@@ -23,11 +24,10 @@ const (
 	Client Side = "client"
 )
 
-
 // Edge describes the other resource that metrics are associated with
 type Edge struct {
 	Direction Direction           `json:"direction"`
-	Side Side `json:"side"`
+	Side      Side                `json:"side"`
 	Resource  *v1.ObjectReference `json:"resource"`
 }
 
