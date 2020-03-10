@@ -1,8 +1,8 @@
 package v1alpha2
 
-// TrafficSplit describes which branch of a traffic split these metrics
+// Backend describes which branch of a traffic split these metrics
 // represent.
-type TrafficSplit struct {
+type Backend struct {
 	apex   string `json:"apex"`
 	leaf   string `json:"leaf"`
 	weight int    `json:"weight"`

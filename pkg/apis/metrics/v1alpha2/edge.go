@@ -26,10 +26,10 @@ const (
 
 // Edge describes the other resource that metrics are associated with
 type Edge struct {
-	Direction    Direction           `json:"direction"`
-	Side         Side                `json:"side"`
-	Resource     *v1.ObjectReference `json:"resource"`
-	TrafficSplit *TrafficSplit       `json:"traffic_split"`
+	Direction Direction           `json:"direction"`
+	Side      Side                `json:"side"`
+	Resource  *v1.ObjectReference `json:"resource"`
+	Backend   *Backend            `json:"backend"`
 }
 
 // String returns a formatted string representation of this struct
