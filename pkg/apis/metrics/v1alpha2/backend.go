@@ -4,6 +4,6 @@ package v1alpha2
 // represent.
 type Backend struct {
 	apex   string `json:"apex"`
-	leaf   string `json:"leaf"`
+	name   string `json:"name"`
 	weight int    `json:"weight"`
 }
