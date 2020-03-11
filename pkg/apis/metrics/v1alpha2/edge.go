@@ -29,7 +29,6 @@ type Edge struct {
 	Direction Direction           `json:"direction"`
 	Side      Side                `json:"side"`
 	Resource  *v1.ObjectReference `json:"resource"`
-	Backend   *Backend            `json:"backend"`
 }
 
 // String returns a formatted string representation of this struct

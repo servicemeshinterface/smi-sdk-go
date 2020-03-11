@@ -47,11 +47,6 @@ func (in *Edge) DeepCopyInto(out *Edge) {
 		*out = new(v1.ObjectReference)
 		**out = **in
 	}
-	if in.Backend != nil {
-		in, out := &in.Backend, &out.Backend
-		*out = new(Backend)
-		**out = **in
-	}
 	return
 }
 
@@ -123,6 +118,11 @@ func (in *TrafficMetrics) DeepCopyInto(out *TrafficMetrics) {
 		in, out := &in.Edge, &out.Edge
 		*out = new(Edge)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Backend != nil {
+		in, out := &in.Backend, &out.Backend
+		*out = new(Backend)
+		**out = **in
 	}
 	if in.Metrics != nil {
 		in, out := &in.Metrics, &out.Metrics
