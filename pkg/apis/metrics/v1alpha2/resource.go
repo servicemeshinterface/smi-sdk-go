@@ -73,6 +73,7 @@ type TrafficMetrics struct {
 
 	Resource *v1.ObjectReference `json:"resource"`
 	Edge     *Edge               `json:"edge"`
+	Route    string              `json:"route"`
 	Metrics  []*Metric           `json:"metrics"`
 }
 
