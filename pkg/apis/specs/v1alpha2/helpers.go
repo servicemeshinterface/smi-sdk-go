@@ -23,3 +23,12 @@ func (h *httpHeaders) UnmarshalJSON(b []byte) error {
 	}
 	return nil
 }
+
+// MarshalJSON converts a given map to array of single value maps
+func (h httpHeaders) MarshalJSON() ([]byte, error) {
+	var returnArr []map[string]string
+	for key, val := range h {
+		returnArr = append(returnArr, map[string]string{key: val})
+	}
+	return json.Marshal(returnArr)
+}
