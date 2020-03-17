@@ -20,6 +20,8 @@ import (
 	clientset "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned"
 	metricsv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha1"
 	fakemetricsv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha1/fake"
+	metricsv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha2"
+	fakemetricsv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha2/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -77,4 +79,9 @@ var _ clientset.Interface = &Clientset{}
 // MetricsV1alpha1 retrieves the MetricsV1alpha1Client
 func (c *Clientset) MetricsV1alpha1() metricsv1alpha1.MetricsV1alpha1Interface {
 	return &fakemetricsv1alpha1.FakeMetricsV1alpha1{Fake: &c.Fake}
+}
+
+// MetricsV1alpha2 retrieves the MetricsV1alpha2Client
+func (c *Clientset) MetricsV1alpha2() metricsv1alpha2.MetricsV1alpha2Interface {
+	return &fakemetricsv1alpha2.FakeMetricsV1alpha2{Fake: &c.Fake}
 }
