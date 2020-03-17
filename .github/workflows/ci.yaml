@@ -12,8 +12,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Go
+        uses: actions/setup-go@v2-beta
+        with:
+          go-version: 1.14.x
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          path: go/src/github.com/deislabs/smi-sdk-go
       - name: Restore Cache
         uses: actions/cache@v1
         with:
@@ -21,15 +28,17 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
-      - name: Setup Go
-        uses: actions/setup-go@v2-beta
-        with:
-          go-version: 1.14.x
       - name: Download deps
-        run: make tidy
+        run: cd /home/runner/work/smi-sdk-go/smi-sdk-go/go/src/github.com/deislabs/smi-sdk-go && make tidy
+        env:
+          GOPATH: /home/runner/work/smi-sdk-go/go
       - name: Verify fmt
-        run: make verify-fmt
+        run: cd /home/runner/work/smi-sdk-go/smi-sdk-go/go/src/github.com/deislabs/smi-sdk-go && make verify-fmt
+        env:
+          GOPATH: /home/runner/work/smi-sdk-go/go
       - name: Verify codegen
-        run: make verify-codegen
+        run: cd /home/runner/work/smi-sdk-go/smi-sdk-go/go/src/github.com/deislabs/smi-sdk-go && make verify-codegen
+        env:
+          GOPATH: /home/runner/work/smi-sdk-go/go
       - name: Run unit tests
-        run: make test
+        run: cd /home/runner/work/smi-sdk-go/smi-sdk-go/go/src/github.com/deislabs/smi-sdk-go && make test
