@@ -17,11 +17,11 @@ limitations under the License.
 package fake
 
 import (
-	clientset "github.com/deislabs/smi-sdk-go/pkg/gen/client/specs/clientset/versioned"
-	specsv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha1"
-	fakespecsv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha1/fake"
-	specsv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha2"
-	fakespecsv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha2/fake"
+	clientset "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/clientset/versioned"
+	specsv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha1"
+	fakespecsv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha1/fake"
+	specsv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha2"
+	fakespecsv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha2/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"

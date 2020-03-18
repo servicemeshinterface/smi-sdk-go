@@ -17,7 +17,7 @@ limitations under the License.
 package fake
 
 import (
-	v1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/access/clientset/versioned/typed/access/v1alpha1"
+	v1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/clientset/versioned/typed/access/v1alpha1"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
 )

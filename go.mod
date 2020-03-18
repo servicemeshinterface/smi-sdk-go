@@ -1,4 +1,4 @@
-module github.com/deislabs/smi-sdk-go
+module github.com/servicemeshinterface/smi-sdk-go
 
 go 1.13
 

@@ -19,10 +19,10 @@ package v1alpha1
 import (
 	time "time"
 
-	metricsv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/apis/metrics/v1alpha1"
-	versioned "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned"
-	internalinterfaces "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/informers/externalversions/internalinterfaces"
-	v1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/listers/metrics/v1alpha1"
+	metricsv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/metrics/v1alpha1"
+	versioned "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned"
+	internalinterfaces "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/metrics/informers/externalversions/internalinterfaces"
+	v1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/metrics/listers/metrics/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"

@@ -17,8 +17,8 @@ limitations under the License.
 package v1alpha2
 
 import (
-	v1alpha2 "github.com/deislabs/smi-sdk-go/pkg/apis/metrics/v1alpha2"
-	"github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/scheme"
+	v1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/metrics/v1alpha2"
+	"github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/scheme"
 	rest "k8s.io/client-go/rest"
 )
 

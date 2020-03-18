@@ -19,9 +19,9 @@ package versioned
 import (
 	"fmt"
 
-	splitv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha1"
-	splitv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha2"
-	splitv1alpha3 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha3"
+	splitv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha1"
+	splitv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha2"
+	splitv1alpha3 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha3"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"

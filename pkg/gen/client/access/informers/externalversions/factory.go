@@ -21,9 +21,9 @@ import (
 	sync "sync"
 	time "time"
 
-	versioned "github.com/deislabs/smi-sdk-go/pkg/gen/client/access/clientset/versioned"
-	access "github.com/deislabs/smi-sdk-go/pkg/gen/client/access/informers/externalversions/access"
-	internalinterfaces "github.com/deislabs/smi-sdk-go/pkg/gen/client/access/informers/externalversions/internalinterfaces"
+	versioned "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/clientset/versioned"
+	access "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/informers/externalversions/access"
+	internalinterfaces "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/informers/externalversions/internalinterfaces"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"

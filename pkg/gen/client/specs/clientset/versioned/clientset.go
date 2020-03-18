@@ -19,8 +19,8 @@ package versioned
 import (
 	"fmt"
 
-	specsv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha1"
-	specsv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha2"
+	specsv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha1"
+	specsv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha2"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"

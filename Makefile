@@ -7,6 +7,10 @@ bootstrap:
 test:
 	go test -v ./...
 
+.PHONY: codegen
+codegen:
+	./hack/update-codegen.sh
+
 .PHONY: verify
 verify:
 	./hack/verify-codegen.sh

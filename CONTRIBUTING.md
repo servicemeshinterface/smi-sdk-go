@@ -4,7 +4,7 @@
 
 Whether you are a user or contributor, official support channels include:
 
-- [Issues](https://github.com/deislabs/smi-spec/issues)
+- [Issues](https://github.com/servicemeshinterface/smi-sdk-go/issues)
 - #general Slack channel in the [SMI Slack](https://smi-spec.slack.com)
 
 ## Project Governance

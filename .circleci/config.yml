@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.13
-    working_directory: /go/src/github.com/deislabs/smi-sdk-go
+    working_directory: /go/src/github.com/servicemeshinterface/smi-sdk-go
     steps:
       - checkout
       - restore_cache:

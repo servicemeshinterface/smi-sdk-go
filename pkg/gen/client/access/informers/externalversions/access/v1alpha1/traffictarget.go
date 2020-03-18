@@ -19,10 +19,10 @@ package v1alpha1
 import (
 	time "time"
 
-	accessv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/apis/access/v1alpha1"
-	versioned "github.com/deislabs/smi-sdk-go/pkg/gen/client/access/clientset/versioned"
-	internalinterfaces "github.com/deislabs/smi-sdk-go/pkg/gen/client/access/informers/externalversions/internalinterfaces"
-	v1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/access/listers/access/v1alpha1"
+	accessv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/access/v1alpha1"
+	versioned "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/clientset/versioned"
+	internalinterfaces "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/informers/externalversions/internalinterfaces"
+	v1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/listers/access/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"

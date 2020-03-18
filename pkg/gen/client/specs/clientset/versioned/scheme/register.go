@@ -17,8 +17,8 @@ limitations under the License.
 package scheme
 
 import (
-	specsv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/apis/specs/v1alpha1"
-	specsv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/apis/specs/v1alpha2"
+	specsv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/specs/v1alpha1"
+	specsv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/specs/v1alpha2"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"

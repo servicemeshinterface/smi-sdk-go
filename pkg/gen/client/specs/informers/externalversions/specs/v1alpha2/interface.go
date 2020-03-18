@@ -17,7 +17,7 @@ limitations under the License.
 package v1alpha2
 
 import (
-	internalinterfaces "github.com/deislabs/smi-sdk-go/pkg/gen/client/specs/informers/externalversions/internalinterfaces"
+	internalinterfaces "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/informers/externalversions/internalinterfaces"
 )
 
 // Interface provides access to all the informers in this group version.

@@ -3,7 +3,7 @@
 set -eu
 
 # ROOT_PACKAGE :: the package (relative to $GOPATH/src) that is the target for code generation
-ROOT_PACKAGE="github.com/deislabs/smi-sdk-go"
+ROOT_PACKAGE="github.com/servicemeshinterface/smi-sdk-go"
 
 function generate_client() {
 

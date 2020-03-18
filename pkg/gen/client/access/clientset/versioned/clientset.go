@@ -19,7 +19,7 @@ package versioned
 import (
 	"fmt"
 
-	accessv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/access/clientset/versioned/typed/access/v1alpha1"
+	accessv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/clientset/versioned/typed/access/v1alpha1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"

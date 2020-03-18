@@ -19,8 +19,8 @@ package v1alpha2
 import (
 	"time"
 
-	v1alpha2 "github.com/deislabs/smi-sdk-go/pkg/apis/metrics/v1alpha2"
-	scheme "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/scheme"
+	v1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/metrics/v1alpha2"
+	scheme "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/scheme"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
