@@ -19,8 +19,8 @@ package versioned
 import (
 	"fmt"
 
-	metricsv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha1"
-	metricsv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha2"
+	metricsv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha1"
+	metricsv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha2"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"

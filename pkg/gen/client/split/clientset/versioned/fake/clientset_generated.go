@@ -17,13 +17,13 @@ limitations under the License.
 package fake
 
 import (
-	clientset "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned"
-	splitv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha1"
-	fakesplitv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha1/fake"
-	splitv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha2"
-	fakesplitv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha2/fake"
-	splitv1alpha3 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha3"
-	fakesplitv1alpha3 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha3/fake"
+	clientset "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned"
+	splitv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha1"
+	fakesplitv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha1/fake"
+	splitv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha2"
+	fakesplitv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha2/fake"
+	splitv1alpha3 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha3"
+	fakesplitv1alpha3 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha3/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"

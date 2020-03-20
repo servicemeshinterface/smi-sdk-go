@@ -17,8 +17,8 @@ limitations under the License.
 package access
 
 import (
-	v1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/access/informers/externalversions/access/v1alpha1"
-	internalinterfaces "github.com/deislabs/smi-sdk-go/pkg/gen/client/access/informers/externalversions/internalinterfaces"
+	v1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/informers/externalversions/access/v1alpha1"
+	internalinterfaces "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/informers/externalversions/internalinterfaces"
 )
 
 // Interface provides access to each of this group's versions.

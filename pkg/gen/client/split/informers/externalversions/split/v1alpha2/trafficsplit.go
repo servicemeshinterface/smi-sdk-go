@@ -19,10 +19,10 @@ package v1alpha2
 import (
 	time "time"
 
-	splitv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/apis/split/v1alpha2"
-	versioned "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned"
-	internalinterfaces "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/informers/externalversions/internalinterfaces"
-	v1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/split/listers/split/v1alpha2"
+	splitv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/split/v1alpha2"
+	versioned "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned"
+	internalinterfaces "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/informers/externalversions/internalinterfaces"
+	v1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/listers/split/v1alpha2"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"

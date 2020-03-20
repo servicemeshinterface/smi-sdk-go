@@ -17,8 +17,8 @@ limitations under the License.
 package v1alpha3
 
 import (
-	v1alpha3 "github.com/deislabs/smi-sdk-go/pkg/apis/split/v1alpha3"
-	"github.com/deislabs/smi-sdk-go/pkg/gen/client/split/clientset/versioned/scheme"
+	v1alpha3 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/split/v1alpha3"
+	"github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned/scheme"
 	rest "k8s.io/client-go/rest"
 )
 

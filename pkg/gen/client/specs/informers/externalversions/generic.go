@@ -19,8 +19,8 @@ package externalversions
 import (
 	"fmt"
 
-	v1alpha1 "github.com/deislabs/smi-sdk-go/pkg/apis/specs/v1alpha1"
-	v1alpha2 "github.com/deislabs/smi-sdk-go/pkg/apis/specs/v1alpha2"
+	v1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/specs/v1alpha1"
+	v1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/specs/v1alpha2"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
 )

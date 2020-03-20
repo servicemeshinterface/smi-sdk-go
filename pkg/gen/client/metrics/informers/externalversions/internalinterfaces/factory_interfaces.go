@@ -19,7 +19,7 @@ package internalinterfaces
 import (
 	time "time"
 
-	versioned "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned"
+	versioned "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	cache "k8s.io/client-go/tools/cache"

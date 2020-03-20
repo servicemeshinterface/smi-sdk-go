@@ -17,9 +17,9 @@ limitations under the License.
 package fake
 
 import (
-	clientset "github.com/deislabs/smi-sdk-go/pkg/gen/client/access/clientset/versioned"
-	accessv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/access/clientset/versioned/typed/access/v1alpha1"
-	fakeaccessv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/access/clientset/versioned/typed/access/v1alpha1/fake"
+	clientset "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/clientset/versioned"
+	accessv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/clientset/versioned/typed/access/v1alpha1"
+	fakeaccessv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/clientset/versioned/typed/access/v1alpha1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"

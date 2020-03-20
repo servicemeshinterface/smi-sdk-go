@@ -17,7 +17,7 @@ limitations under the License.
 package v1alpha1
 
 import (
-	v1alpha1 "github.com/deislabs/smi-sdk-go/pkg/apis/split/v1alpha1"
+	v1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/split/v1alpha1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/client-go/tools/cache"

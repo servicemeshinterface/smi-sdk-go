@@ -5,7 +5,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	"github.com/deislabs/smi-sdk-go/pkg/apis/metrics"
+	"github.com/servicemeshinterface/smi-sdk-go/pkg/apis/metrics"
 )
 
 // SchemeGroupVersion is the identifier for the API which includes

@@ -17,9 +17,9 @@ limitations under the License.
 package specs
 
 import (
-	internalinterfaces "github.com/deislabs/smi-sdk-go/pkg/gen/client/specs/informers/externalversions/internalinterfaces"
-	v1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/specs/informers/externalversions/specs/v1alpha1"
-	v1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/specs/informers/externalversions/specs/v1alpha2"
+	internalinterfaces "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/informers/externalversions/internalinterfaces"
+	v1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/informers/externalversions/specs/v1alpha1"
+	v1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/informers/externalversions/specs/v1alpha2"
 )
 
 // Interface provides access to each of this group's versions.

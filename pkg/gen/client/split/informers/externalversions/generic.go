@@ -19,9 +19,9 @@ package externalversions
 import (
 	"fmt"
 
-	v1alpha1 "github.com/deislabs/smi-sdk-go/pkg/apis/split/v1alpha1"
-	v1alpha2 "github.com/deislabs/smi-sdk-go/pkg/apis/split/v1alpha2"
-	v1alpha3 "github.com/deislabs/smi-sdk-go/pkg/apis/split/v1alpha3"
+	v1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/split/v1alpha1"
+	v1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/split/v1alpha2"
+	v1alpha3 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/split/v1alpha3"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
 )

@@ -17,11 +17,11 @@ limitations under the License.
 package fake
 
 import (
-	clientset "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned"
-	metricsv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha1"
-	fakemetricsv1alpha1 "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha1/fake"
-	metricsv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha2"
-	fakemetricsv1alpha2 "github.com/deislabs/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha2/fake"
+	clientset "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned"
+	metricsv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha1"
+	fakemetricsv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha1/fake"
+	metricsv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha2"
+	fakemetricsv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/metrics/clientset/versioned/typed/metrics/v1alpha2/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
