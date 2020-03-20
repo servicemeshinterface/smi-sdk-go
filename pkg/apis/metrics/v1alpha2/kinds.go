@@ -50,6 +50,14 @@ var AvailableKinds = map[string]*metav1.APIResource{
 			"list",
 		},
 	},
+	"Trafficsplit": {
+		Name:       "trafficsplits",
+		Namespaced: true,
+		Kind:       "TrafficMetrics",
+		Verbs: []string{
+			"get",
+		},
+	},
 }
 
 func getKindName(kind string) string {
