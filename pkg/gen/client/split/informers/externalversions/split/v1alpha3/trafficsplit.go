@@ -17,6 +17,7 @@ limitations under the License.
 package v1alpha3
 
 import (
+	"context"
 	time "time"
 
 	splitv1alpha3 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/split/v1alpha3"
@@ -59,13 +60,13 @@ func NewFilteredTrafficSplitInformer(client versioned.Interface, namespace strin
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.SplitV1alpha3().TrafficSplits(namespace).List(options)
+				return client.SplitV1alpha3().TrafficSplits(namespace).List(context.TODO(), options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.SplitV1alpha3().TrafficSplits(namespace).Watch(options)
+				return client.SplitV1alpha3().TrafficSplits(namespace).Watch(context.TODO(), options)
 			},
 		},
 		&splitv1alpha3.TrafficSplit{},
