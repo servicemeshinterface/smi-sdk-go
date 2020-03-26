@@ -17,6 +17,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/metrics/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
@@ -37,7 +39,7 @@ var trafficmetricsesResource = schema.GroupVersionResource{Group: "metrics.smi-s
 var trafficmetricsesKind = schema.GroupVersionKind{Group: "metrics.smi-spec.io", Version: "v1alpha1", Kind: "TrafficMetrics"}
 
 // Get takes name of the trafficMetrics, and returns the corresponding trafficMetrics object, and an error if there is any.
-func (c *FakeTrafficMetricses) Get(name string, options v1.GetOptions) (result *v1alpha1.TrafficMetrics, err error) {
+func (c *FakeTrafficMetricses) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.TrafficMetrics, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(trafficmetricsesResource, c.ns, name), &v1alpha1.TrafficMetrics{})
 
@@ -48,7 +50,7 @@ func (c *FakeTrafficMetricses) Get(name string, options v1.GetOptions) (result *
 }
 
 // List takes label and field selectors, and returns the list of TrafficMetricses that match those selectors.
-func (c *FakeTrafficMetricses) List(opts v1.ListOptions) (result *v1alpha1.TrafficMetricsList, err error) {
+func (c *FakeTrafficMetricses) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.TrafficMetricsList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(trafficmetricsesResource, trafficmetricsesKind, c.ns, opts), &v1alpha1.TrafficMetricsList{})
 
@@ -70,14 +72,14 @@ func (c *FakeTrafficMetricses) List(opts v1.ListOptions) (result *v1alpha1.Traff
 }
 
 // Watch returns a watch.Interface that watches the requested trafficMetricses.
-func (c *FakeTrafficMetricses) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeTrafficMetricses) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(trafficmetricsesResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a trafficMetrics and creates it.  Returns the server's representation of the trafficMetrics, and an error, if there is any.
-func (c *FakeTrafficMetricses) Create(trafficMetrics *v1alpha1.TrafficMetrics) (result *v1alpha1.TrafficMetrics, err error) {
+func (c *FakeTrafficMetricses) Create(ctx context.Context, trafficMetrics *v1alpha1.TrafficMetrics, opts v1.CreateOptions) (result *v1alpha1.TrafficMetrics, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(trafficmetricsesResource, c.ns, trafficMetrics), &v1alpha1.TrafficMetrics{})
 
@@ -88,7 +90,7 @@ func (c *FakeTrafficMetricses) Create(trafficMetrics *v1alpha1.TrafficMetrics) (
 }
 
 // Update takes the representation of a trafficMetrics and updates it. Returns the server's representation of the trafficMetrics, and an error, if there is any.
-func (c *FakeTrafficMetricses) Update(trafficMetrics *v1alpha1.TrafficMetrics) (result *v1alpha1.TrafficMetrics, err error) {
+func (c *FakeTrafficMetricses) Update(ctx context.Context, trafficMetrics *v1alpha1.TrafficMetrics, opts v1.UpdateOptions) (result *v1alpha1.TrafficMetrics, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(trafficmetricsesResource, c.ns, trafficMetrics), &v1alpha1.TrafficMetrics{})
 
@@ -99,7 +101,7 @@ func (c *FakeTrafficMetricses) Update(trafficMetrics *v1alpha1.TrafficMetrics) (
 }
 
 // Delete takes name of the trafficMetrics and deletes it. Returns an error if one occurs.
-func (c *FakeTrafficMetricses) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeTrafficMetricses) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(trafficmetricsesResource, c.ns, name), &v1alpha1.TrafficMetrics{})
 
@@ -107,15 +109,15 @@ func (c *FakeTrafficMetricses) Delete(name string, options *v1.DeleteOptions) er
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeTrafficMetricses) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(trafficmetricsesResource, c.ns, listOptions)
+func (c *FakeTrafficMetricses) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(trafficmetricsesResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.TrafficMetricsList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched trafficMetrics.
-func (c *FakeTrafficMetricses) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.TrafficMetrics, err error) {
+func (c *FakeTrafficMetricses) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.TrafficMetrics, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(trafficmetricsesResource, c.ns, name, pt, data, subresources...), &v1alpha1.TrafficMetrics{})
 

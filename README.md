@@ -1,6 +1,8 @@
-# SMI SDK for Golang
+# SMI SDK for Go
 
-Shared code and example implementations for [SMI Spec](https://github.com/servicemeshinterface/smi-spec)
+[![ci](https://github.com/servicemeshinterface/smi-sdk-go/workflows/ci/badge.svg)](https://github.com/servicemeshinterface/smi-sdk-go/actions)
+
+Kubernetes client implementation for [SMI](https://github.com/servicemeshinterface/smi-spec).
 
 ## API
 

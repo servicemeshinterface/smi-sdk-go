@@ -17,6 +17,7 @@ limitations under the License.
 package v1alpha2
 
 import (
+	"context"
 	time "time"
 
 	metricsv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/metrics/v1alpha2"
@@ -59,13 +60,13 @@ func NewFilteredTrafficMetricsInformer(client versioned.Interface, namespace str
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.MetricsV1alpha2().TrafficMetricses(namespace).List(options)
+				return client.MetricsV1alpha2().TrafficMetricses(namespace).List(context.TODO(), options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.MetricsV1alpha2().TrafficMetricses(namespace).Watch(options)
+				return client.MetricsV1alpha2().TrafficMetricses(namespace).Watch(context.TODO(), options)
 			},
 		},
 		&metricsv1alpha2.TrafficMetrics{},

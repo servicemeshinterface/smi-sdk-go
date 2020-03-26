@@ -17,6 +17,7 @@ limitations under the License.
 package v1alpha2
 
 import (
+	"context"
 	"time"
 
 	v1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/specs/v1alpha2"
@@ -35,14 +36,14 @@ type HTTPRouteGroupsGetter interface {
 
 // HTTPRouteGroupInterface has methods to work with HTTPRouteGroup resources.
 type HTTPRouteGroupInterface interface {
-	Create(*v1alpha2.HTTPRouteGroup) (*v1alpha2.HTTPRouteGroup, error)
-	Update(*v1alpha2.HTTPRouteGroup) (*v1alpha2.HTTPRouteGroup, error)
-	Delete(name string, options *v1.DeleteOptions) error
-	DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error
-	Get(name string, options v1.GetOptions) (*v1alpha2.HTTPRouteGroup, error)
-	List(opts v1.ListOptions) (*v1alpha2.HTTPRouteGroupList, error)
-	Watch(opts v1.ListOptions) (watch.Interface, error)
-	Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha2.HTTPRouteGroup, err error)
+	Create(ctx context.Context, hTTPRouteGroup *v1alpha2.HTTPRouteGroup, opts v1.CreateOptions) (*v1alpha2.HTTPRouteGroup, error)
+	Update(ctx context.Context, hTTPRouteGroup *v1alpha2.HTTPRouteGroup, opts v1.UpdateOptions) (*v1alpha2.HTTPRouteGroup, error)
+	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1alpha2.HTTPRouteGroup, error)
+	List(ctx context.Context, opts v1.ListOptions) (*v1alpha2.HTTPRouteGroupList, error)
+	Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha2.HTTPRouteGroup, err error)
 	HTTPRouteGroupExpansion
 }
 
@@ -61,20 +62,20 @@ func newHTTPRouteGroups(c *SpecsV1alpha2Client, namespace string) *hTTPRouteGrou
 }
 
 // Get takes name of the hTTPRouteGroup, and returns the corresponding hTTPRouteGroup object, and an error if there is any.
-func (c *hTTPRouteGroups) Get(name string, options v1.GetOptions) (result *v1alpha2.HTTPRouteGroup, err error) {
+func (c *hTTPRouteGroups) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha2.HTTPRouteGroup, err error) {
 	result = &v1alpha2.HTTPRouteGroup{}
 	err = c.client.Get().
 		Namespace(c.ns).
 		Resource("httproutegroups").
 		Name(name).
 		VersionedParams(&options, scheme.ParameterCodec).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // List takes label and field selectors, and returns the list of HTTPRouteGroups that match those selectors.
-func (c *hTTPRouteGroups) List(opts v1.ListOptions) (result *v1alpha2.HTTPRouteGroupList, err error) {
+func (c *hTTPRouteGroups) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha2.HTTPRouteGroupList, err error) {
 	var timeout time.Duration
 	if opts.TimeoutSeconds != nil {
 		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
@@ -85,13 +86,13 @@ func (c *hTTPRouteGroups) List(opts v1.ListOptions) (result *v1alpha2.HTTPRouteG
 		Resource("httproutegroups").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // Watch returns a watch.Interface that watches the requested hTTPRouteGroups.
-func (c *hTTPRouteGroups) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *hTTPRouteGroups) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	var timeout time.Duration
 	if opts.TimeoutSeconds != nil {
 		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
@@ -102,71 +103,74 @@ func (c *hTTPRouteGroups) Watch(opts v1.ListOptions) (watch.Interface, error) {
 		Resource("httproutegroups").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
-		Watch()
+		Watch(ctx)
 }
 
 // Create takes the representation of a hTTPRouteGroup and creates it.  Returns the server's representation of the hTTPRouteGroup, and an error, if there is any.
-func (c *hTTPRouteGroups) Create(hTTPRouteGroup *v1alpha2.HTTPRouteGroup) (result *v1alpha2.HTTPRouteGroup, err error) {
+func (c *hTTPRouteGroups) Create(ctx context.Context, hTTPRouteGroup *v1alpha2.HTTPRouteGroup, opts v1.CreateOptions) (result *v1alpha2.HTTPRouteGroup, err error) {
 	result = &v1alpha2.HTTPRouteGroup{}
 	err = c.client.Post().
 		Namespace(c.ns).
 		Resource("httproutegroups").
+		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(hTTPRouteGroup).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // Update takes the representation of a hTTPRouteGroup and updates it. Returns the server's representation of the hTTPRouteGroup, and an error, if there is any.
-func (c *hTTPRouteGroups) Update(hTTPRouteGroup *v1alpha2.HTTPRouteGroup) (result *v1alpha2.HTTPRouteGroup, err error) {
+func (c *hTTPRouteGroups) Update(ctx context.Context, hTTPRouteGroup *v1alpha2.HTTPRouteGroup, opts v1.UpdateOptions) (result *v1alpha2.HTTPRouteGroup, err error) {
 	result = &v1alpha2.HTTPRouteGroup{}
 	err = c.client.Put().
 		Namespace(c.ns).
 		Resource("httproutegroups").
 		Name(hTTPRouteGroup.Name).
+		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(hTTPRouteGroup).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // Delete takes name of the hTTPRouteGroup and deletes it. Returns an error if one occurs.
-func (c *hTTPRouteGroups) Delete(name string, options *v1.DeleteOptions) error {
+func (c *hTTPRouteGroups) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	return c.client.Delete().
 		Namespace(c.ns).
 		Resource("httproutegroups").
 		Name(name).
-		Body(options).
-		Do().
+		Body(&opts).
+		Do(ctx).
 		Error()
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *hTTPRouteGroups) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
+func (c *hTTPRouteGroups) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
 	var timeout time.Duration
-	if listOptions.TimeoutSeconds != nil {
-		timeout = time.Duration(*listOptions.TimeoutSeconds) * time.Second
+	if listOpts.TimeoutSeconds != nil {
+		timeout = time.Duration(*listOpts.TimeoutSeconds) * time.Second
 	}
 	return c.client.Delete().
 		Namespace(c.ns).
 		Resource("httproutegroups").
-		VersionedParams(&listOptions, scheme.ParameterCodec).
+		VersionedParams(&listOpts, scheme.ParameterCodec).
 		Timeout(timeout).
-		Body(options).
-		Do().
+		Body(&opts).
+		Do(ctx).
 		Error()
 }
 
 // Patch applies the patch and returns the patched hTTPRouteGroup.
-func (c *hTTPRouteGroups) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha2.HTTPRouteGroup, err error) {
+func (c *hTTPRouteGroups) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha2.HTTPRouteGroup, err error) {
 	result = &v1alpha2.HTTPRouteGroup{}
 	err = c.client.Patch(pt).
 		Namespace(c.ns).
 		Resource("httproutegroups").
-		SubResource(subresources...).
 		Name(name).
+		SubResource(subresources...).
+		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(data).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }

@@ -17,6 +17,7 @@ limitations under the License.
 package v1alpha2
 
 import (
+	"context"
 	time "time"
 
 	specsv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/specs/v1alpha2"
@@ -59,13 +60,13 @@ func NewFilteredHTTPRouteGroupInformer(client versioned.Interface, namespace str
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.SpecsV1alpha2().HTTPRouteGroups(namespace).List(options)
+				return client.SpecsV1alpha2().HTTPRouteGroups(namespace).List(context.TODO(), options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.SpecsV1alpha2().HTTPRouteGroups(namespace).Watch(options)
+				return client.SpecsV1alpha2().HTTPRouteGroups(namespace).Watch(context.TODO(), options)
 			},
 		},
 		&specsv1alpha2.HTTPRouteGroup{},

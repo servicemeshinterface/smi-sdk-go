@@ -17,6 +17,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/specs/v1alpha2"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
@@ -37,7 +39,7 @@ var httproutegroupsResource = schema.GroupVersionResource{Group: "specs.smi-spec
 var httproutegroupsKind = schema.GroupVersionKind{Group: "specs.smi-spec.io", Version: "v1alpha2", Kind: "HTTPRouteGroup"}
 
 // Get takes name of the hTTPRouteGroup, and returns the corresponding hTTPRouteGroup object, and an error if there is any.
-func (c *FakeHTTPRouteGroups) Get(name string, options v1.GetOptions) (result *v1alpha2.HTTPRouteGroup, err error) {
+func (c *FakeHTTPRouteGroups) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha2.HTTPRouteGroup, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(httproutegroupsResource, c.ns, name), &v1alpha2.HTTPRouteGroup{})
 
@@ -48,7 +50,7 @@ func (c *FakeHTTPRouteGroups) Get(name string, options v1.GetOptions) (result *v
 }
 
 // List takes label and field selectors, and returns the list of HTTPRouteGroups that match those selectors.
-func (c *FakeHTTPRouteGroups) List(opts v1.ListOptions) (result *v1alpha2.HTTPRouteGroupList, err error) {
+func (c *FakeHTTPRouteGroups) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha2.HTTPRouteGroupList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(httproutegroupsResource, httproutegroupsKind, c.ns, opts), &v1alpha2.HTTPRouteGroupList{})
 
@@ -70,14 +72,14 @@ func (c *FakeHTTPRouteGroups) List(opts v1.ListOptions) (result *v1alpha2.HTTPRo
 }
 
 // Watch returns a watch.Interface that watches the requested hTTPRouteGroups.
-func (c *FakeHTTPRouteGroups) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeHTTPRouteGroups) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(httproutegroupsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a hTTPRouteGroup and creates it.  Returns the server's representation of the hTTPRouteGroup, and an error, if there is any.
-func (c *FakeHTTPRouteGroups) Create(hTTPRouteGroup *v1alpha2.HTTPRouteGroup) (result *v1alpha2.HTTPRouteGroup, err error) {
+func (c *FakeHTTPRouteGroups) Create(ctx context.Context, hTTPRouteGroup *v1alpha2.HTTPRouteGroup, opts v1.CreateOptions) (result *v1alpha2.HTTPRouteGroup, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(httproutegroupsResource, c.ns, hTTPRouteGroup), &v1alpha2.HTTPRouteGroup{})
 
@@ -88,7 +90,7 @@ func (c *FakeHTTPRouteGroups) Create(hTTPRouteGroup *v1alpha2.HTTPRouteGroup) (r
 }
 
 // Update takes the representation of a hTTPRouteGroup and updates it. Returns the server's representation of the hTTPRouteGroup, and an error, if there is any.
-func (c *FakeHTTPRouteGroups) Update(hTTPRouteGroup *v1alpha2.HTTPRouteGroup) (result *v1alpha2.HTTPRouteGroup, err error) {
+func (c *FakeHTTPRouteGroups) Update(ctx context.Context, hTTPRouteGroup *v1alpha2.HTTPRouteGroup, opts v1.UpdateOptions) (result *v1alpha2.HTTPRouteGroup, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(httproutegroupsResource, c.ns, hTTPRouteGroup), &v1alpha2.HTTPRouteGroup{})
 
@@ -99,7 +101,7 @@ func (c *FakeHTTPRouteGroups) Update(hTTPRouteGroup *v1alpha2.HTTPRouteGroup) (r
 }
 
 // Delete takes name of the hTTPRouteGroup and deletes it. Returns an error if one occurs.
-func (c *FakeHTTPRouteGroups) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeHTTPRouteGroups) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(httproutegroupsResource, c.ns, name), &v1alpha2.HTTPRouteGroup{})
 
@@ -107,15 +109,15 @@ func (c *FakeHTTPRouteGroups) Delete(name string, options *v1.DeleteOptions) err
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeHTTPRouteGroups) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(httproutegroupsResource, c.ns, listOptions)
+func (c *FakeHTTPRouteGroups) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(httproutegroupsResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha2.HTTPRouteGroupList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched hTTPRouteGroup.
-func (c *FakeHTTPRouteGroups) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha2.HTTPRouteGroup, err error) {
+func (c *FakeHTTPRouteGroups) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha2.HTTPRouteGroup, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(httproutegroupsResource, c.ns, name, pt, data, subresources...), &v1alpha2.HTTPRouteGroup{})
 
