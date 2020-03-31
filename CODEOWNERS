@@ -1,5 +1,6 @@
-# Maintainers: @nicholasjackson @grampelberg @adleong @surajssd @lachie83 @brendanburns @slack @michelleN @stefanprodan
-CODEOWNERS @nicholasjackson @grampelberg @adleong @surajssd @lachie83 @brendanburns @slack @michelleN @stefanprodan
-CONTRIBUTING.md @nicholasjackson @grampelberg @adleong @surajssd @lachie83 @brendanburns @slack @michelleN @stefanprodan
-LICENSE @nicholasjackson @grampelberg @adleong @surajssd @lachie83 @brendanburns @slack @michelleN @stefanprodan
-GOVERNANCE.md @nicholasjackson @grampelberg @adleong @surajssd @lachie83 @brendanburns @slack @michelleN @stefanprodan
+# Maintainers: @nicholasjackson @grampelberg @adleong @lachie83 @slack @michelleN @stefanprodan
+CODEOWNERS @nicholasjackson @grampelberg @adleong @lachie83 @slack @michelleN @stefanprodan
+CONTRIBUTING.md @nicholasjackson @grampelberg @adleong @lachie83 @slack @michelleN @stefanprodan
+LICENSE @nicholasjackson @grampelberg @adleong @lachie83 @slack @michelleN @stefanprodan
+GOVERNANCE.md @nicholasjackson @grampelberg @adleong @lachie83 @slack @michelleN @stefanprodan
+# EMERITUS Maintainers: @brendanburns @surajssd
