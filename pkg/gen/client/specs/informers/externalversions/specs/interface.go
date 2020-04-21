@@ -20,6 +20,7 @@ import (
 	internalinterfaces "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/informers/externalversions/internalinterfaces"
 	v1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/informers/externalversions/specs/v1alpha1"
 	v1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/informers/externalversions/specs/v1alpha2"
+	v1alpha4 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/informers/externalversions/specs/v1alpha4"
 )
 
 // Interface provides access to each of this group's versions.
@@ -28,6 +29,8 @@ type Interface interface {
 	V1alpha1() v1alpha1.Interface
 	// V1alpha2 provides access to shared informers for resources in V1alpha2.
 	V1alpha2() v1alpha2.Interface
+	// V1alpha4 provides access to shared informers for resources in V1alpha4.
+	V1alpha4() v1alpha4.Interface
 }
 
 type group struct {
@@ -49,4 +52,9 @@ func (g *group) V1alpha1() v1alpha1.Interface {
 // V1alpha2 returns a new v1alpha2.Interface.
 func (g *group) V1alpha2() v1alpha2.Interface {
 	return v1alpha2.New(g.factory, g.namespace, g.tweakListOptions)
+}
+
+// V1alpha4 returns a new v1alpha4.Interface.
+func (g *group) V1alpha4() v1alpha4.Interface {
+	return v1alpha4.New(g.factory, g.namespace, g.tweakListOptions)
 }

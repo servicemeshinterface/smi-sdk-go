@@ -21,6 +21,7 @@ import (
 
 	v1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/specs/v1alpha1"
 	v1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/specs/v1alpha2"
+	v1alpha4 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/specs/v1alpha4"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
 )
@@ -62,6 +63,14 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Specs().V1alpha2().HTTPRouteGroups().Informer()}, nil
 	case v1alpha2.SchemeGroupVersion.WithResource("tcproutes"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Specs().V1alpha2().TCPRoutes().Informer()}, nil
+
+		// Group=specs.smi-spec.io, Version=v1alpha4
+	case v1alpha4.SchemeGroupVersion.WithResource("httproutegroups"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Specs().V1alpha4().HTTPRouteGroups().Informer()}, nil
+	case v1alpha4.SchemeGroupVersion.WithResource("tcproutes"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Specs().V1alpha4().TCPRoutes().Informer()}, nil
+	case v1alpha4.SchemeGroupVersion.WithResource("udproutes"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Specs().V1alpha4().UDPRoutes().Informer()}, nil
 
 	}
 
