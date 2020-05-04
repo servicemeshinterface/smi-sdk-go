@@ -51,7 +51,7 @@ type IdentityBindingSubject struct {
 	// Namespace where the Subject is deployed
 	Namespace string `json:"namespace,omitempty"`
 	// Port defines a TCP port to apply the TrafficTarget to
-	Port string `json:"port,omitempty"`
+	Port int `json:"port,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
