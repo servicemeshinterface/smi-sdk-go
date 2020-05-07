@@ -28,7 +28,6 @@ spec:
           required:
             - name
             - kind
-            - port
           properties:
             kind:
               description: Kind of the destination.
