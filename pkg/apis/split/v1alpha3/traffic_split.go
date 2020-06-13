@@ -34,8 +34,8 @@ type TrafficSplitSpec struct {
 
 // TrafficSplitBackend defines a backend
 type TrafficSplitBackend struct {
-	Service string `json:"service,omitempty"`
-	Weight  int    `json:"weight,omitempty"`
+	Service string `json:"service"`
+	Weight  int    `json:"weight"`
 
 	// Matches allows defining a list of HTTP route groups that this traffic split object should match
 	// +optional
