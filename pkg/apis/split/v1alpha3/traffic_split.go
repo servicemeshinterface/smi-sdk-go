@@ -30,16 +30,16 @@ type TrafficSplit struct {
 type TrafficSplitSpec struct {
 	Service  string                `json:"service,omitempty"`
 	Backends []TrafficSplitBackend `json:"backends,omitempty"`
+
+	// Matches allows defining a list of HTTP route groups that this traffic split object should match
+	// +optional
+	Matches []corev1.TypedLocalObjectReference `json:"matches,omitempty"`
 }
 
 // TrafficSplitBackend defines a backend
 type TrafficSplitBackend struct {
 	Service string `json:"service,omitempty"`
 	Weight  int    `json:"weight,omitempty"`
-
-	// Matches allows defining a list of HTTP route groups that this traffic split object should match
-	// +optional
-	Matches []corev1.TypedLocalObjectReference `json:"matches,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
