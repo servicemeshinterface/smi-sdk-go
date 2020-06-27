@@ -22,6 +22,8 @@ import (
 	fakespecsv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha1/fake"
 	specsv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha2"
 	fakespecsv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha2/fake"
+	specsv1alpha3 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha3"
+	fakespecsv1alpha3 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha3/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -84,4 +86,9 @@ func (c *Clientset) SpecsV1alpha1() specsv1alpha1.SpecsV1alpha1Interface {
 // SpecsV1alpha2 retrieves the SpecsV1alpha2Client
 func (c *Clientset) SpecsV1alpha2() specsv1alpha2.SpecsV1alpha2Interface {
 	return &fakespecsv1alpha2.FakeSpecsV1alpha2{Fake: &c.Fake}
+}
+
+// SpecsV1alpha3 retrieves the SpecsV1alpha3Client
+func (c *Clientset) SpecsV1alpha3() specsv1alpha3.SpecsV1alpha3Interface {
+	return &fakespecsv1alpha3.FakeSpecsV1alpha3{Fake: &c.Fake}
 }
