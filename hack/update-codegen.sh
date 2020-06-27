@@ -56,7 +56,7 @@ function generate_client() {
 }
 
 echo "##### Generating specs client ######"
-generate_client "specs" "v1alpha1,v1alpha2"
+generate_client "specs" "v1alpha1,v1alpha2,v1alpha4"
 
 echo ""
 echo "###### Generating split client ######"
