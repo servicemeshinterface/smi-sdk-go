@@ -19,6 +19,7 @@ package scheme
 import (
 	specsv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/specs/v1alpha1"
 	specsv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/specs/v1alpha2"
+	specsv1alpha3 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/specs/v1alpha3"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -32,6 +33,7 @@ var ParameterCodec = runtime.NewParameterCodec(Scheme)
 var localSchemeBuilder = runtime.SchemeBuilder{
 	specsv1alpha1.AddToScheme,
 	specsv1alpha2.AddToScheme,
+	specsv1alpha3.AddToScheme,
 }
 
 // AddToScheme adds all types of this clientset into the given scheme. This allows composition

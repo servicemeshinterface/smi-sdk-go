@@ -21,6 +21,7 @@ import (
 
 	specsv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha1"
 	specsv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha2"
+	specsv1alpha3 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/specs/clientset/versioned/typed/specs/v1alpha3"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -30,6 +31,7 @@ type Interface interface {
 	Discovery() discovery.DiscoveryInterface
 	SpecsV1alpha1() specsv1alpha1.SpecsV1alpha1Interface
 	SpecsV1alpha2() specsv1alpha2.SpecsV1alpha2Interface
+	SpecsV1alpha3() specsv1alpha3.SpecsV1alpha3Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
@@ -38,6 +40,7 @@ type Clientset struct {
 	*discovery.DiscoveryClient
 	specsV1alpha1 *specsv1alpha1.SpecsV1alpha1Client
 	specsV1alpha2 *specsv1alpha2.SpecsV1alpha2Client
+	specsV1alpha3 *specsv1alpha3.SpecsV1alpha3Client
 }
 
 // SpecsV1alpha1 retrieves the SpecsV1alpha1Client
@@ -48,6 +51,11 @@ func (c *Clientset) SpecsV1alpha1() specsv1alpha1.SpecsV1alpha1Interface {
 // SpecsV1alpha2 retrieves the SpecsV1alpha2Client
 func (c *Clientset) SpecsV1alpha2() specsv1alpha2.SpecsV1alpha2Interface {
 	return c.specsV1alpha2
+}
+
+// SpecsV1alpha3 retrieves the SpecsV1alpha3Client
+func (c *Clientset) SpecsV1alpha3() specsv1alpha3.SpecsV1alpha3Interface {
+	return c.specsV1alpha3
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -79,6 +87,10 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	if err != nil {
 		return nil, err
 	}
+	cs.specsV1alpha3, err = specsv1alpha3.NewForConfig(&configShallowCopy)
+	if err != nil {
+		return nil, err
+	}
 
 	cs.DiscoveryClient, err = discovery.NewDiscoveryClientForConfig(&configShallowCopy)
 	if err != nil {
@@ -93,6 +105,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 	var cs Clientset
 	cs.specsV1alpha1 = specsv1alpha1.NewForConfigOrDie(c)
 	cs.specsV1alpha2 = specsv1alpha2.NewForConfigOrDie(c)
+	cs.specsV1alpha3 = specsv1alpha3.NewForConfigOrDie(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClientForConfigOrDie(c)
 	return &cs
@@ -103,6 +116,7 @@ func New(c rest.Interface) *Clientset {
 	var cs Clientset
 	cs.specsV1alpha1 = specsv1alpha1.New(c)
 	cs.specsV1alpha2 = specsv1alpha2.New(c)
+	cs.specsV1alpha3 = specsv1alpha3.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs

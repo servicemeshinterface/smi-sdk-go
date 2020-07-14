@@ -20,6 +20,8 @@ import (
 	clientset "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/clientset/versioned"
 	accessv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/clientset/versioned/typed/access/v1alpha1"
 	fakeaccessv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/clientset/versioned/typed/access/v1alpha1/fake"
+	accessv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/clientset/versioned/typed/access/v1alpha2"
+	fakeaccessv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/clientset/versioned/typed/access/v1alpha2/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -77,4 +79,9 @@ var _ clientset.Interface = &Clientset{}
 // AccessV1alpha1 retrieves the AccessV1alpha1Client
 func (c *Clientset) AccessV1alpha1() accessv1alpha1.AccessV1alpha1Interface {
 	return &fakeaccessv1alpha1.FakeAccessV1alpha1{Fake: &c.Fake}
+}
+
+// AccessV1alpha2 retrieves the AccessV1alpha2Client
+func (c *Clientset) AccessV1alpha2() accessv1alpha2.AccessV1alpha2Interface {
+	return &fakeaccessv1alpha2.FakeAccessV1alpha2{Fake: &c.Fake}
 }
