@@ -28,18 +28,26 @@ type TrafficSplit struct {
 
 // TrafficSplitSpec is the specification for a TrafficSplit
 type TrafficSplitSpec struct {
-	Service  string                `json:"service,omitempty"`
-	Backends []TrafficSplitBackend `json:"backends,omitempty"`
+	// Service represents the apex service
+	Service string `json:"service"`
 
-	// Matches allows defining a list of HTTP route groups that this traffic split object should match
+	// Backends defines a list of Kubernetes services
+	// used as the traffic split destination
+	Backends []TrafficSplitBackend `json:"backends"`
+
+	// Matches allows defining a list of HTTP route groups
+	// that this traffic split object should match
 	// +optional
 	Matches []corev1.TypedLocalObjectReference `json:"matches,omitempty"`
 }
 
 // TrafficSplitBackend defines a backend
 type TrafficSplitBackend struct {
+	// Service is the name of a Kubernetes service
 	Service string `json:"service"`
-	Weight  int    `json:"weight"`
+
+	// Weight defines the traffic split percentage
+	Weight int `json:"weight"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

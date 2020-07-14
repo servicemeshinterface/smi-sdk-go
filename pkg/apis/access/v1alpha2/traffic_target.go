@@ -31,19 +31,24 @@ type TrafficTargetSpec struct {
 	Destination IdentityBindingSubject `json:"destination"`
 
 	// Sources are the pod or group of pods to allow ingress traffic
-	Sources []IdentityBindingSubject `json:"sources"`
+	// +optional
+	Sources []IdentityBindingSubject `json:"sources,omitempty"`
 
-	// Rules are the traffic rules to allow (HTTPRoutes | TCPRoute),
-	Rules []TrafficTargetRule `json:"rules"`
+	// Rules are the traffic rules to allow (HTTPRoutes | TCPRoute)
+	// +optional
+	Rules []TrafficTargetRule `json:"rules,omitempty"`
 }
 
 // TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget
 type TrafficTargetRule struct {
 	// Kind is the kind of TrafficSpec to allow
 	Kind string `json:"kind"`
+
 	// Name of the TrafficSpec to use
 	Name string `json:"name"`
+
 	// Matches is a list of TrafficSpec routes to allow traffic for
+	// +optional
 	Matches []string `json:"matches,omitempty"`
 }
 
@@ -51,12 +56,17 @@ type TrafficTargetRule struct {
 type IdentityBindingSubject struct {
 	// Kind is the type of Subject to allow ingress (ServiceAccount | Group)
 	Kind string `json:"kind"`
+
 	// Name of the Subject, i.e. ServiceAccountName
 	Name string `json:"name"`
+
 	// Namespace where the Subject is deployed
+	// +optional
 	Namespace string `json:"namespace,omitempty"`
+
 	// Port defines a TCP port to apply the TrafficTarget to
-	Port int `json:"port,omitempty"`
+	// +optional
+	Port *int `json:"port,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
