@@ -10,12 +10,19 @@ All releases until then will be marked `v0.x.0` where `x` is incremented with ea
 
 To perform a release of the smi-sdk-go project:
 
-1. Start by creating and pushing a git tag in the form: `v0.x.0`.
+1. Create and push a git tag for release version
+Start by creating and pushing a git tag in the form: `v0.x.0`.
 ```console
 $ git tag -a v0.x.0 -m "version 0.x.0"
 $ git push origin v0.x.0
 ```
 
-2. Last, visit the [releases page](https://github.com/servicemeshinterface/smi-sdk-go/releases)
+2. Create a GitHub release
+Visit the [releases page](https://github.com/servicemeshinterface/smi-sdk-go/releases)
 to `Draft a new release` using the tag you just created and pushed.
-Be sure to include release notes on what changes are included in the release.
+
+3. Add release notes
+Run script `scripts/release-notes.sh` to generate release notes. Copy and paste output
+to release description section. Fill in smi spec version compatability information.
+
+4. Click the "Publish release" button
