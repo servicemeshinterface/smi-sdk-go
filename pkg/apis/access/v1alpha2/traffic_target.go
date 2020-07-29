@@ -22,7 +22,7 @@ type TrafficTarget struct {
 	// +optional
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec []TrafficTargetSpec `json:"spec"`
+	Spec TrafficTargetSpec `json:"spec"`
 }
 
 // TrafficTargetSpec is the specification of a TrafficTarget
