@@ -48,13 +48,7 @@ func (in *TrafficTarget) DeepCopyInto(out *TrafficTarget) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
 	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
-	if in.Spec != nil {
-		in, out := &in.Spec, &out.Spec
-		*out = make([]TrafficTargetSpec, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
-	}
+	in.Spec.DeepCopyInto(&out.Spec)
 	return
 }
 
