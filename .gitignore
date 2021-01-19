@@ -15,3 +15,5 @@ vendor
 Gopkg.lock
 
 .vscode
+
+.DS_Store
