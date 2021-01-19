@@ -21,6 +21,7 @@ import (
 
 	v1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/access/v1alpha1"
 	v1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/access/v1alpha2"
+	v1alpha3 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/access/v1alpha3"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
 )
@@ -58,6 +59,10 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		// Group=access.smi-spec.io, Version=v1alpha2
 	case v1alpha2.SchemeGroupVersion.WithResource("traffictargets"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Access().V1alpha2().TrafficTargets().Informer()}, nil
+
+		// Group=access.smi-spec.io, Version=v1alpha3
+	case v1alpha3.SchemeGroupVersion.WithResource("traffictargets"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Access().V1alpha3().TrafficTargets().Informer()}, nil
 
 	}
 

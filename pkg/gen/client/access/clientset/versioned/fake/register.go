@@ -19,6 +19,7 @@ package fake
 import (
 	accessv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/access/v1alpha1"
 	accessv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/access/v1alpha2"
+	accessv1alpha3 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/access/v1alpha3"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -32,6 +33,7 @@ var parameterCodec = runtime.NewParameterCodec(scheme)
 var localSchemeBuilder = runtime.SchemeBuilder{
 	accessv1alpha1.AddToScheme,
 	accessv1alpha2.AddToScheme,
+	accessv1alpha3.AddToScheme,
 }
 
 // AddToScheme adds all types of this clientset into the given scheme. This allows composition

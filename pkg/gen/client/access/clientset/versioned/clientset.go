@@ -21,6 +21,7 @@ import (
 
 	accessv1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/clientset/versioned/typed/access/v1alpha1"
 	accessv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/clientset/versioned/typed/access/v1alpha2"
+	accessv1alpha3 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/access/clientset/versioned/typed/access/v1alpha3"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -30,6 +31,7 @@ type Interface interface {
 	Discovery() discovery.DiscoveryInterface
 	AccessV1alpha1() accessv1alpha1.AccessV1alpha1Interface
 	AccessV1alpha2() accessv1alpha2.AccessV1alpha2Interface
+	AccessV1alpha3() accessv1alpha3.AccessV1alpha3Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
@@ -38,6 +40,7 @@ type Clientset struct {
 	*discovery.DiscoveryClient
 	accessV1alpha1 *accessv1alpha1.AccessV1alpha1Client
 	accessV1alpha2 *accessv1alpha2.AccessV1alpha2Client
+	accessV1alpha3 *accessv1alpha3.AccessV1alpha3Client
 }
 
 // AccessV1alpha1 retrieves the AccessV1alpha1Client
@@ -48,6 +51,11 @@ func (c *Clientset) AccessV1alpha1() accessv1alpha1.AccessV1alpha1Interface {
 // AccessV1alpha2 retrieves the AccessV1alpha2Client
 func (c *Clientset) AccessV1alpha2() accessv1alpha2.AccessV1alpha2Interface {
 	return c.accessV1alpha2
+}
+
+// AccessV1alpha3 retrieves the AccessV1alpha3Client
+func (c *Clientset) AccessV1alpha3() accessv1alpha3.AccessV1alpha3Interface {
+	return c.accessV1alpha3
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -79,6 +87,10 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	if err != nil {
 		return nil, err
 	}
+	cs.accessV1alpha3, err = accessv1alpha3.NewForConfig(&configShallowCopy)
+	if err != nil {
+		return nil, err
+	}
 
 	cs.DiscoveryClient, err = discovery.NewDiscoveryClientForConfig(&configShallowCopy)
 	if err != nil {
@@ -93,6 +105,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 	var cs Clientset
 	cs.accessV1alpha1 = accessv1alpha1.NewForConfigOrDie(c)
 	cs.accessV1alpha2 = accessv1alpha2.NewForConfigOrDie(c)
+	cs.accessV1alpha3 = accessv1alpha3.NewForConfigOrDie(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClientForConfigOrDie(c)
 	return &cs
@@ -103,6 +116,7 @@ func New(c rest.Interface) *Clientset {
 	var cs Clientset
 	cs.accessV1alpha1 = accessv1alpha1.New(c)
 	cs.accessV1alpha2 = accessv1alpha2.New(c)
+	cs.accessV1alpha3 = accessv1alpha3.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs
