@@ -24,6 +24,8 @@ import (
 	fakesplitv1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha2/fake"
 	splitv1alpha3 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha3"
 	fakesplitv1alpha3 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha3/fake"
+	splitv1alpha4 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha4"
+	fakesplitv1alpha4 "github.com/servicemeshinterface/smi-sdk-go/pkg/gen/client/split/clientset/versioned/typed/split/v1alpha4/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -91,4 +93,9 @@ func (c *Clientset) SplitV1alpha2() splitv1alpha2.SplitV1alpha2Interface {
 // SplitV1alpha3 retrieves the SplitV1alpha3Client
 func (c *Clientset) SplitV1alpha3() splitv1alpha3.SplitV1alpha3Interface {
 	return &fakesplitv1alpha3.FakeSplitV1alpha3{Fake: &c.Fake}
+}
+
+// SplitV1alpha4 retrieves the SplitV1alpha4Client
+func (c *Clientset) SplitV1alpha4() splitv1alpha4.SplitV1alpha4Interface {
+	return &fakesplitv1alpha4.FakeSplitV1alpha4{Fake: &c.Fake}
 }

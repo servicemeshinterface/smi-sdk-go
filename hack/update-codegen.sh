@@ -60,7 +60,7 @@ generate_client "specs" "v1alpha1,v1alpha2,v1alpha3,v1alpha4"
 
 echo ""
 echo "###### Generating split client ######"
-generate_client "split" "v1alpha1,v1alpha2,v1alpha3"
+generate_client "split" "v1alpha1,v1alpha2,v1alpha3,v1alpha4"
 
 echo ""
 echo "##### Generating access client ######"
