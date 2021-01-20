@@ -22,6 +22,7 @@ import (
 	v1alpha1 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/split/v1alpha1"
 	v1alpha2 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/split/v1alpha2"
 	v1alpha3 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/split/v1alpha3"
+	v1alpha4 "github.com/servicemeshinterface/smi-sdk-go/pkg/apis/split/v1alpha4"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
 )
@@ -63,6 +64,10 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		// Group=split.smi-spec.io, Version=v1alpha3
 	case v1alpha3.SchemeGroupVersion.WithResource("trafficsplits"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Split().V1alpha3().TrafficSplits().Informer()}, nil
+
+		// Group=split.smi-spec.io, Version=v1alpha4
+	case v1alpha4.SchemeGroupVersion.WithResource("trafficsplits"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Split().V1alpha4().TrafficSplits().Informer()}, nil
 
 	}
 
