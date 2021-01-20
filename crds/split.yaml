@@ -13,11 +13,14 @@ spec:
     - ts
     plural: trafficsplits
     singular: trafficsplit
-  version: v1alpha3
+  version: v1alpha4
   versions:
-    - name: v1alpha3
+    - name: v1alpha4
       served: true
       storage: true
+    - name: v1alpha3
+      served: false
+      storage: false
     - name: v1alpha2
       served: false
       storage: false
