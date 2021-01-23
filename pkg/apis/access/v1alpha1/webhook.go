@@ -18,12 +18,7 @@ package v1alpha1
 
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
-	"sigs.k8s.io/controller-runtime/pkg/conversion"
-	logf "sigs.k8s.io/controller-runtime/pkg/log"
 )
-
-// log is for logging in this package.
-var traffictargetlog = logf.Log.WithName("traffictarget-resource")
 
 func (r *TrafficTarget) SetupWebhookWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewWebhookManagedBy(mgr).
@@ -31,12 +26,5 @@ func (r *TrafficTarget) SetupWebhookWithManager(mgr ctrl.Manager) error {
 		Complete()
 }
 
-func (src *TrafficTarget) ConvertTo(dstRaw conversion.Hub) error {
-
-	return nil
-}
-
-func (src *TrafficTarget) ConvertFrom(srcRaw conversion.Hub) error {
-
-	return nil
-}
+// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
+func (*TrafficTarget) Hub() {}
