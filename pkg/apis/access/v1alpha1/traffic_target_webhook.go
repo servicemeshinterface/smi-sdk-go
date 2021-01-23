@@ -20,11 +20,15 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 )
 
+/*
+This setup doubles as setup for our conversion webhooks: as long as our
+types implement the
+[Hub](https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/conversion?tab=doc#Hub) and
+[Convertible](https://pkg.go.dev/sigs.k8s.io/controller-runtime/pkg/conversion?tab=doc#Convertible)
+interfaces, a conversion webhook will be registered.
+*/
 func (r *TrafficTarget) SetupWebhookWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewWebhookManagedBy(mgr).
 		For(r).
 		Complete()
 }
-
-// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
-func (*TrafficTarget) Hub() {}
