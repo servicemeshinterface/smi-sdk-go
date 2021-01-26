@@ -67,7 +67,7 @@ func (dst *TrafficSplit) ConvertFrom(srcRaw conversion.Hub) error {
 
 	dst.Spec.Backends = []TrafficSplitBackend{}
 	for _, b := range src.Spec.Backends {
-		i, _ := b.Weight.AsInt64()
+		i := b.Weight.AsDec().UnscaledBig().Int64()
 
 		dst.Spec.Backends = append(
 			dst.Spec.Backends,
