@@ -2,6 +2,7 @@ package v1alpha2
 
 import (
 	"github.com/servicemeshinterface/smi-sdk-go/pkg/apis/split/v1alpha1"
+	"k8s.io/apimachinery/pkg/api/resource"
 	"sigs.k8s.io/controller-runtime/pkg/conversion"
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
 )
@@ -27,6 +28,24 @@ func (src *TrafficSplit) ConvertTo(dstRaw conversion.Hub) error {
 	dst := dstRaw.(*v1alpha1.TrafficSplit)
 	dst.ObjectMeta = src.ObjectMeta
 
+	dst.Spec = v1alpha1.TrafficSplitSpec{
+		Service: src.Spec.Service,
+	}
+
+	dst.Spec.Backends = []v1alpha1.TrafficSplitBackend{}
+	for _, b := range src.Spec.Backends {
+		weight := resource.NewQuantity(int64(b.Weight), resource.DecimalSI)
+
+		dst.Spec.Backends = append(
+			dst.Spec.Backends,
+			v1alpha1.TrafficSplitBackend{
+				Service: b.Service,
+				Weight:  weight,
+			},
+		)
+
+	}
+
 	return nil
 }
 
@@ -41,6 +60,24 @@ func (dst *TrafficSplit) ConvertFrom(srcRaw conversion.Hub) error {
 
 	src := srcRaw.(*v1alpha1.TrafficSplit)
 	dst.ObjectMeta = src.ObjectMeta
+
+	dst.Spec = TrafficSplitSpec{
+		Service: src.Spec.Service,
+	}
+
+	dst.Spec.Backends = []TrafficSplitBackend{}
+	for _, b := range src.Spec.Backends {
+		i, _ := b.Weight.AsInt64()
+
+		dst.Spec.Backends = append(
+			dst.Spec.Backends,
+			TrafficSplitBackend{
+				Service: b.Service,
+				Weight:  int(i), // 32 bit system are going to have problems here
+			},
+		)
+
+	}
 
 	return nil
 }
