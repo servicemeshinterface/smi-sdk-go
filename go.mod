@@ -5,7 +5,6 @@ go 1.14
 require (
 	github.com/golang/groupcache v0.0.0-20190702054246-869f871628b6 // indirect
 	github.com/stretchr/testify v1.6.1
-	github.com/tj/assert v0.0.3
 	k8s.io/api v0.18.8
 	k8s.io/apimachinery v0.18.8
 	k8s.io/client-go v0.18.8

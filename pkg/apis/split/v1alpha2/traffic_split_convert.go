@@ -23,7 +23,7 @@ Most of the conversion is straightforward copying, except for converting our cha
 */
 // ConvertTo converts this CronJob to the Hub version (v1).
 func (src *TrafficSplit) ConvertTo(dstRaw conversion.Hub) error {
-	traffictargetlog.Info("ConvertTo v1alpha1")
+	traffictargetlog.Info("ConvertTo v1alpha1 from v1alpha2")
 
 	dst := dstRaw.(*v1alpha1.TrafficSplit)
 	dst.ObjectMeta = src.ObjectMeta

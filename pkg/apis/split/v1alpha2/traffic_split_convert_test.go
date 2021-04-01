@@ -8,10 +8,21 @@ import (
 	"k8s.io/apimachinery/pkg/api/resource"
 )
 
+func testGetv1Split() *v1alpha1.TrafficSplit {
+	weight1, _ := resource.ParseQuantity("100")
+	weight2, _ := resource.ParseQuantity("200")
+
+	v1Split := *v1
+	v1Split.Spec.Backends[0].Weight = &weight1
+	v1Split.Spec.Backends[1].Weight = &weight2
+
+	return &v1Split
+}
+
 func TestConvertToConvertsToAlpha1FromAlpha2(t *testing.T) {
 	v1Test := &v1alpha1.TrafficSplit{}
 
-	err := v2.ConvertTo(v1)
+	err := v2.ConvertTo(v1Test)
 	assert.NoError(t, err)
 
 	assert.Equal(t, v2.Spec.Service, v1Test.Spec.Service)
@@ -26,20 +37,21 @@ func TestConvertToConvertsToAlpha1FromAlpha2(t *testing.T) {
 	}
 }
 
-func TestConvertToConvertsFromAlpha2ToAlpha1(t *testing.T) {
+func TestConvertToConvertsFromAlpha1ToAlpha2(t *testing.T) {
 	v2Test := &TrafficSplit{}
+	v1Test := testGetv1Split()
 
-	err := v2Test.ConvertFrom(v1)
+	err := v2Test.ConvertFrom(v1Test)
 	assert.NoError(t, err)
 
-	assert.Equal(t, v1.Spec.Service, v2Test.Spec.Service)
+	assert.Equal(t, v1Test.Spec.Service, v2Test.Spec.Service)
 
-	assert.Len(t, v2Test.Spec.Backends, len(v1.Spec.Backends))
+	assert.Len(t, v2Test.Spec.Backends, len(v1Test.Spec.Backends))
 
-	for i, b := range v1.Spec.Backends {
+	for i, b := range v1Test.Spec.Backends {
 		assert.Equal(t, b.Service, v2Test.Spec.Backends[i].Service)
 
-		weight, _ := b.Weight.AsInt64()
+		weight := b.Weight.AsDec().UnscaledBig().Int64()
 		assert.Equal(t, int(weight), v2Test.Spec.Backends[i].Weight)
 	}
 }
@@ -66,11 +78,9 @@ var v1 = &v1alpha1.TrafficSplit{
 		Backends: []v1alpha1.TrafficSplitBackend{
 			v1alpha1.TrafficSplitBackend{
 				Service: "v1",
-				Weight:  resource.NewQuantity(int64(100), resource.DecimalSI),
 			},
 			v1alpha1.TrafficSplitBackend{
 				Service: "v2",
-				Weight:  resource.NewQuantity(int64(200), resource.DecimalSI),
 			},
 		},
 	},
