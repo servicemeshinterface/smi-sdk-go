@@ -3,8 +3,6 @@ package v1alpha1
 import (
 	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-
-	corev1 "k8s.io/api/core/v1"
 )
 
 // +genclient
@@ -38,15 +36,9 @@ type TrafficSplitSpec struct {
 type TrafficSplitBackend struct {
 	Service string             `json:"service,omitempty"`
 	Weight  *resource.Quantity `json:"weight,omitempty"`
-
-	// These fields are for conversion only
-	// https://book.kubebuilder.io/multiversion-tutorial/tutorial.html
-	WeightInt int                                `json:"weight_int,omitempty"`
-	Matches   []corev1.TypedLocalObjectReference `json:"matches,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
 type TrafficSplitList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata"`

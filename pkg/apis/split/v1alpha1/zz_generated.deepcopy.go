@@ -19,7 +19,6 @@ limitations under the License.
 package v1alpha1
 
 import (
-	v1 "k8s.io/api/core/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -57,13 +56,6 @@ func (in *TrafficSplitBackend) DeepCopyInto(out *TrafficSplitBackend) {
 		in, out := &in.Weight, &out.Weight
 		x := (*in).DeepCopy()
 		*out = &x
-	}
-	if in.Matches != nil {
-		in, out := &in.Matches, &out.Matches
-		*out = make([]v1.TypedLocalObjectReference, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
 	}
 	return
 }

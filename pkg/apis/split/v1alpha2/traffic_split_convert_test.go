@@ -3,60 +3,44 @@ package v1alpha2
 import (
 	"testing"
 
-	"github.com/servicemeshinterface/smi-sdk-go/pkg/apis/split/v1alpha1"
+	"github.com/servicemeshinterface/smi-sdk-go/pkg/apis/split/v1alpha4"
 	assert "github.com/stretchr/testify/require"
-	"k8s.io/apimachinery/pkg/api/resource"
+	corev1 "k8s.io/api/core/v1"
 )
 
-func testGetv1Split() *v1alpha1.TrafficSplit {
-	weight1, _ := resource.ParseQuantity("100")
-	weight2, _ := resource.ParseQuantity("200")
-
-	v1Split := *v1
-	v1Split.Spec.Backends[0].Weight = &weight1
-	v1Split.Spec.Backends[1].Weight = &weight2
-
-	return &v1Split
-}
-
-func TestConvertToConvertsToAlpha1FromAlpha2(t *testing.T) {
-	v1Test := &v1alpha1.TrafficSplit{}
-
-	err := v2.ConvertTo(v1Test)
-	assert.NoError(t, err)
-
-	assert.Equal(t, v2.Spec.Service, v1Test.Spec.Service)
-
-	assert.Len(t, v1Test.Spec.Backends, len(v2.Spec.Backends))
-
-	for i, b := range v2.Spec.Backends {
-		assert.Equal(t, b.Service, v1Test.Spec.Backends[i].Service)
-
-		weight := resource.NewQuantity(int64(b.Weight), resource.DecimalSI)
-		assert.Equal(t, weight, v1Test.Spec.Backends[i].Weight)
-	}
-}
-
-func TestConvertToConvertsFromAlpha1ToAlpha2(t *testing.T) {
+func TestConvertToConvertsFromAlpha4ToAlpha2(t *testing.T) {
 	v2Test := &TrafficSplit{}
-	v1Test := testGetv1Split()
 
-	err := v2Test.ConvertFrom(v1Test)
+	err := v2Test.ConvertFrom(v4Split)
 	assert.NoError(t, err)
 
-	assert.Equal(t, v1Test.Spec.Service, v2Test.Spec.Service)
+	assert.Equal(t, v4Split.Spec.Service, v2Test.Spec.Service)
 
-	assert.Len(t, v2Test.Spec.Backends, len(v1Test.Spec.Backends))
+	assert.Len(t, v4Split.Spec.Backends, len(v2Test.Spec.Backends))
 
-	for i, b := range v1Test.Spec.Backends {
+	for i, b := range v4Split.Spec.Backends {
 		assert.Equal(t, b.Service, v2Test.Spec.Backends[i].Service)
-
-		weight := b.Weight.AsDec().UnscaledBig().Int64()
-		assert.Equal(t, int(weight), v2Test.Spec.Backends[i].Weight)
+		assert.Equal(t, b.Weight, v2Test.Spec.Backends[i].Weight)
 	}
 }
 
-var v2 = &TrafficSplit{
+func TestConvertToConvertsToAlpha4FromAlpha2(t *testing.T) {
+	v4Test := &v1alpha4.TrafficSplit{}
+
+	err := v2Split.ConvertTo(v4Test)
+	assert.NoError(t, err)
+
+	assert.Equal(t, v2Split.Spec.Service, v4Test.Spec.Service)
+
+	assert.Len(t, v2Split.Spec.Backends, len(v4Test.Spec.Backends))
+
+	for i, b := range v2Split.Spec.Backends {
+		assert.Equal(t, b.Service, v4Test.Spec.Backends[i].Service)
+		assert.Equal(t, b.Weight, v4Test.Spec.Backends[i].Weight)
+	}
+}
+
+var v2Split = &TrafficSplit{
 	Spec: TrafficSplitSpec{
 		Service: "testservice",
 		Backends: []TrafficSplitBackend{
@@ -72,15 +56,27 @@ var v2 = &TrafficSplit{
 	},
 }
 
-var v1 = &v1alpha1.TrafficSplit{
-	Spec: v1alpha1.TrafficSplitSpec{
+var v4Split = &v1alpha4.TrafficSplit{
+	Spec: v1alpha4.TrafficSplitSpec{
 		Service: "testservice",
-		Backends: []v1alpha1.TrafficSplitBackend{
-			v1alpha1.TrafficSplitBackend{
+		Backends: []v1alpha4.TrafficSplitBackend{
+			v1alpha4.TrafficSplitBackend{
 				Service: "v1",
+				Weight:  100,
 			},
-			v1alpha1.TrafficSplitBackend{
+			v1alpha4.TrafficSplitBackend{
 				Service: "v2",
+				Weight:  200,
+			},
+		},
+		Matches: []corev1.TypedLocalObjectReference{
+			corev1.TypedLocalObjectReference{
+				Name: "match1",
+				Kind: "HTTPRouteGroup",
+			},
+			corev1.TypedLocalObjectReference{
+				Name: "match2",
+				Kind: "HTTPRouteGroup",
 			},
 		},
 	},

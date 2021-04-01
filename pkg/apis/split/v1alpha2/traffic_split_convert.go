@@ -1,8 +1,7 @@
 package v1alpha2
 
 import (
-	"github.com/servicemeshinterface/smi-sdk-go/pkg/apis/split/v1alpha1"
-	"k8s.io/apimachinery/pkg/api/resource"
+	"github.com/servicemeshinterface/smi-sdk-go/pkg/apis/split/v1alpha4"
 	"sigs.k8s.io/controller-runtime/pkg/conversion"
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
 )
@@ -23,24 +22,22 @@ Most of the conversion is straightforward copying, except for converting our cha
 */
 // ConvertTo converts this CronJob to the Hub version (v1).
 func (src *TrafficSplit) ConvertTo(dstRaw conversion.Hub) error {
-	traffictargetlog.Info("ConvertTo v1alpha1 from v1alpha2")
+	traffictargetlog.Info("ConvertTo v1alpha4 from v1alpha2")
 
-	dst := dstRaw.(*v1alpha1.TrafficSplit)
+	dst := dstRaw.(*v1alpha4.TrafficSplit)
 	dst.ObjectMeta = src.ObjectMeta
 
-	dst.Spec = v1alpha1.TrafficSplitSpec{
+	dst.Spec = v1alpha4.TrafficSplitSpec{
 		Service: src.Spec.Service,
 	}
 
-	dst.Spec.Backends = []v1alpha1.TrafficSplitBackend{}
+	dst.Spec.Backends = []v1alpha4.TrafficSplitBackend{}
 	for _, b := range src.Spec.Backends {
-		weight := resource.NewQuantity(int64(b.Weight), resource.DecimalSI)
-
 		dst.Spec.Backends = append(
 			dst.Spec.Backends,
-			v1alpha1.TrafficSplitBackend{
+			v1alpha4.TrafficSplitBackend{
 				Service: b.Service,
-				Weight:  weight,
+				Weight:  b.Weight,
 			},
 		)
 
@@ -56,9 +53,9 @@ Most of the conversion is straightforward copying, except for converting our cha
 
 // ConvertFrom converts from the Hub version (v1) to this version.
 func (dst *TrafficSplit) ConvertFrom(srcRaw conversion.Hub) error {
-	traffictargetlog.Info("ConvertFrom v1alpha1")
+	traffictargetlog.Info("ConvertFrom v1alpha4 to v1alpha2")
 
-	src := srcRaw.(*v1alpha1.TrafficSplit)
+	src := srcRaw.(*v1alpha4.TrafficSplit)
 	dst.ObjectMeta = src.ObjectMeta
 
 	dst.Spec = TrafficSplitSpec{
@@ -67,13 +64,11 @@ func (dst *TrafficSplit) ConvertFrom(srcRaw conversion.Hub) error {
 
 	dst.Spec.Backends = []TrafficSplitBackend{}
 	for _, b := range src.Spec.Backends {
-		i := b.Weight.AsDec().UnscaledBig().Int64()
-
 		dst.Spec.Backends = append(
 			dst.Spec.Backends,
 			TrafficSplitBackend{
 				Service: b.Service,
-				Weight:  int(i), // 32 bit system are going to have problems here
+				Weight:  b.Weight,
 			},
 		)
 
