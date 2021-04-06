@@ -1,7 +1,7 @@
 package v1alpha2
 
 import (
-	"github.com/servicemeshinterface/smi-sdk-go/pkg/apis/access/v1alpha1"
+	"github.com/servicemeshinterface/smi-sdk-go/pkg/apis/access/v1alpha3"
 	"sigs.k8s.io/controller-runtime/pkg/conversion"
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
 )
@@ -24,7 +24,7 @@ Most of the conversion is straightforward copying, except for converting our cha
 func (src *TrafficTarget) ConvertTo(dstRaw conversion.Hub) error {
 	traffictargetlog.Info("ConvertTo v1alpha1")
 
-	dst := dstRaw.(*v1alpha1.TrafficTarget)
+	dst := dstRaw.(*v1alpha3.TrafficTarget)
 	dst.ObjectMeta = src.ObjectMeta
 
 	return nil
@@ -39,7 +39,7 @@ Most of the conversion is straightforward copying, except for converting our cha
 func (dst *TrafficTarget) ConvertFrom(srcRaw conversion.Hub) error {
 	traffictargetlog.Info("ConvertFrom v1alpha1")
 
-	src := srcRaw.(*v1alpha1.TrafficTarget)
+	src := srcRaw.(*v1alpha3.TrafficTarget)
 	dst.ObjectMeta = src.ObjectMeta
 
 	return nil
