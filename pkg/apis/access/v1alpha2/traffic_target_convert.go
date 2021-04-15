@@ -20,12 +20,43 @@ the hub version.
 ConvertTo is expected to modify its argument to contain the converted object.
 Most of the conversion is straightforward copying, except for converting our changed field.
 */
-// ConvertTo converts this CronJob to the Hub version (v1).
+// ConvertTo converts this TrafficTarget to the Hub version (v3).
 func (src *TrafficTarget) ConvertTo(dstRaw conversion.Hub) error {
-	traffictargetlog.Info("ConvertTo v1alpha1")
+	traffictargetlog.Info("ConvertTo v1alpha3 from v1alpha1")
 
 	dst := dstRaw.(*v1alpha3.TrafficTarget)
 	dst.ObjectMeta = src.ObjectMeta
+
+	dst.TypeMeta = src.TypeMeta
+	dst.APIVersion = "v1alpha3"
+
+	dst.Spec.Destination = v1alpha3.IdentityBindingSubject{
+		Kind:      src.Spec.Destination.Kind,
+		Name:      src.Spec.Destination.Name,
+		Namespace: src.Spec.Destination.Namespace,
+	}
+
+	dst.Spec.Sources = []v1alpha3.IdentityBindingSubject{}
+	for _, ibs := range src.Spec.Sources {
+		s := v1alpha3.IdentityBindingSubject{
+			Kind:      ibs.Kind,
+			Name:      ibs.Name,
+			Namespace: ibs.Namespace,
+		}
+
+		dst.Spec.Sources = append(dst.Spec.Sources, s)
+	}
+
+	dst.Spec.Rules = []v1alpha3.TrafficTargetRule{}
+	for _, ibs := range src.Spec.Rules {
+		s := v1alpha3.TrafficTargetRule{
+			Kind:    ibs.Kind,
+			Name:    ibs.Name,
+			Matches: ibs.Matches,
+		}
+
+		dst.Spec.Rules = append(dst.Spec.Rules, s)
+	}
 
 	return nil
 }
@@ -37,10 +68,41 @@ Most of the conversion is straightforward copying, except for converting our cha
 
 // ConvertFrom converts from the Hub version (v1) to this version.
 func (dst *TrafficTarget) ConvertFrom(srcRaw conversion.Hub) error {
-	traffictargetlog.Info("ConvertFrom v1alpha1")
+	traffictargetlog.Info("ConvertFrom v1alpha1 to v1alpha3")
 
 	src := srcRaw.(*v1alpha3.TrafficTarget)
 	dst.ObjectMeta = src.ObjectMeta
+
+	dst.TypeMeta = src.TypeMeta
+	dst.APIVersion = "v1alpha2"
+
+	dst.Spec.Destination = IdentityBindingSubject{
+		Kind:      src.Spec.Destination.Kind,
+		Name:      src.Spec.Destination.Name,
+		Namespace: src.Spec.Destination.Namespace,
+	}
+
+	dst.Spec.Sources = []IdentityBindingSubject{}
+	for _, ibs := range src.Spec.Sources {
+		s := IdentityBindingSubject{
+			Kind:      ibs.Kind,
+			Name:      ibs.Name,
+			Namespace: ibs.Namespace,
+		}
+
+		dst.Spec.Sources = append(dst.Spec.Sources, s)
+	}
+
+	dst.Spec.Rules = []TrafficTargetRule{}
+	for _, ibs := range src.Spec.Rules {
+		s := TrafficTargetRule{
+			Kind:    ibs.Kind,
+			Name:    ibs.Name,
+			Matches: ibs.Matches,
+		}
+
+		dst.Spec.Rules = append(dst.Spec.Rules, s)
+	}
 
 	return nil
 }

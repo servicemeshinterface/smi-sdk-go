@@ -60,7 +60,7 @@ func TestConvertToConvertsFromAlpha1ToAlpha3(t *testing.T) {
 
 	// test sources
 	assert.Len(t, v3Test.Spec.Sources, len(v1Access.Sources))
-	for i, s := range v3Access.Spec.Sources {
+	for i, s := range v1Access.Sources {
 		assert.Equal(t, s.Kind, v3Test.Spec.Sources[i].Kind)
 		assert.Equal(t, s.Name, v3Test.Spec.Sources[i].Name)
 		assert.Equal(t, s.Namespace, v3Test.Spec.Sources[i].Namespace)
