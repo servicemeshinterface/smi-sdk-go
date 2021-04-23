@@ -21,12 +21,15 @@ the hub version.
 ConvertTo is expected to modify its argument to contain the converted object.
 Most of the conversion is straightforward copying, except for converting our changed field.
 */
-// ConvertTo converts this CronJob to the Hub version (v1).
+// ConvertTo converts this TrafficSplit to the Hub version (v1alpha4).
 func (src *TrafficSplit) ConvertTo(dstRaw conversion.Hub) error {
 	traffictargetlog.Info("ConvertTo v1alpha4 from v1alpha1")
 
 	dst := dstRaw.(*v1alpha4.TrafficSplit)
 	dst.ObjectMeta = src.ObjectMeta
+
+	dst.TypeMeta = src.TypeMeta
+	dst.APIVersion = "v1alpha4"
 
 	dst.Spec = v1alpha4.TrafficSplitSpec{
 		Service: src.Spec.Service,
@@ -54,12 +57,15 @@ ConvertFrom is expected to modify its receiver to contain the converted object.
 Most of the conversion is straightforward copying, except for converting our changed field.
 */
 
-// ConvertFrom converts from the Hub version (v1) to this version.
+// ConvertFrom converts from the Hub version (v1alpha4) to this version.
 func (dst *TrafficSplit) ConvertFrom(srcRaw conversion.Hub) error {
 	traffictargetlog.Info("ConvertFrom v1alpha1 to v1alpha4")
 
 	src := srcRaw.(*v1alpha4.TrafficSplit)
 	dst.ObjectMeta = src.ObjectMeta
+
+	dst.TypeMeta = src.TypeMeta
+	dst.APIVersion = "v1alpha1"
 
 	dst.Spec = TrafficSplitSpec{
 		Service: src.Spec.Service,

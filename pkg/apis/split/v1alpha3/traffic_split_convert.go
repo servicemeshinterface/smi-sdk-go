@@ -27,6 +27,9 @@ func (src *TrafficSplit) ConvertTo(dstRaw conversion.Hub) error {
 	dst := dstRaw.(*v1alpha4.TrafficSplit)
 	dst.ObjectMeta = src.ObjectMeta
 
+	dst.TypeMeta = src.TypeMeta
+	dst.APIVersion = "v1alpha4"
+
 	dst.Spec = v1alpha4.TrafficSplitSpec{
 		Service: src.Spec.Service,
 	}
@@ -59,6 +62,9 @@ func (dst *TrafficSplit) ConvertFrom(srcRaw conversion.Hub) error {
 
 	src := srcRaw.(*v1alpha4.TrafficSplit)
 	dst.ObjectMeta = src.ObjectMeta
+
+	dst.TypeMeta = src.TypeMeta
+	dst.APIVersion = "v1alpha3"
 
 	dst.Spec = TrafficSplitSpec{
 		Service: src.Spec.Service,

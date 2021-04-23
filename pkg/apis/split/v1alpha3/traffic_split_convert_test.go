@@ -14,6 +14,10 @@ func TestConvertToConvertsFromAlpha4ToAlpha3(t *testing.T) {
 	err := v3Test.ConvertFrom(v4Split)
 	assert.NoError(t, err)
 
+	assert.Equal(t, v3Test.ObjectMeta, v4Split.ObjectMeta)
+	assert.Equal(t, v3Test.TypeMeta.Kind, v4Split.TypeMeta.Kind)
+	assert.Equal(t, "v1alpha3", v3Test.TypeMeta.APIVersion)
+
 	assert.Equal(t, v4Split.Spec.Service, v3Test.Spec.Service)
 
 	assert.Len(t, v4Split.Spec.Backends, len(v3Test.Spec.Backends))
@@ -35,6 +39,10 @@ func TestConvertToConvertsToAlpha4FromAlpha3(t *testing.T) {
 
 	err := v3Split.ConvertTo(v4Test)
 	assert.NoError(t, err)
+
+	assert.Equal(t, v4Test.ObjectMeta, v3Split.ObjectMeta)
+	assert.Equal(t, v4Test.TypeMeta.Kind, v3Split.TypeMeta.Kind)
+	assert.Equal(t, "v1alpha4", v4Test.TypeMeta.APIVersion)
 
 	assert.Equal(t, v3Split.Spec.Service, v4Test.Spec.Service)
 

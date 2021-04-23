@@ -20,9 +20,9 @@ the hub version.
 ConvertTo is expected to modify its argument to contain the converted object.
 Most of the conversion is straightforward copying, except for converting our changed field.
 */
-// ConvertTo converts this TrafficTarget to the Hub version (v3).
+// ConvertTo converts this TrafficTarget to the Hub version (v1alpha3).
 func (src *TrafficTarget) ConvertTo(dstRaw conversion.Hub) error {
-	traffictargetlog.Info("ConvertTo v1alpha3 from v1alpha1")
+	traffictargetlog.Info("ConvertTo v1alpha3 from v1alpha2")
 
 	dst := dstRaw.(*v1alpha3.TrafficTarget)
 	dst.ObjectMeta = src.ObjectMeta
@@ -66,9 +66,9 @@ ConvertFrom is expected to modify its receiver to contain the converted object.
 Most of the conversion is straightforward copying, except for converting our changed field.
 */
 
-// ConvertFrom converts from the Hub version (v1) to this version.
+// ConvertFrom converts from the Hub version (v1alpha3) to this version.
 func (dst *TrafficTarget) ConvertFrom(srcRaw conversion.Hub) error {
-	traffictargetlog.Info("ConvertFrom v1alpha1 to v1alpha3")
+	traffictargetlog.Info("ConvertFrom v1alpha3 to v1alpha2")
 
 	src := srcRaw.(*v1alpha3.TrafficTarget)
 	dst.ObjectMeta = src.ObjectMeta
