@@ -5,8 +5,8 @@ set -eu
 ROOT_PACKAGE="github.com/servicemeshinterface/smi-sdk-go"
 ROOT_DIR="$(git rev-parse --show-toplevel)"
 
-# get code-generator version from go.sum
-CODEGEN_VERSION="$(grep 'k8s.io/code-generator' go.sum | awk '{print $2}' | head -1)"
+# get code-generator version from go.mod, go.sum could have multiple entries for code-generator
+CODEGEN_VERSION="$(grep 'k8s.io/code-generator' go.mod | awk '{print $2}' | head -1)"
 CODEGEN_PKG="$(echo `go env GOPATH`"/pkg/mod/k8s.io/code-generator@${CODEGEN_VERSION}")"
 
 echo ">>> using codegen: ${CODEGEN_PKG}"
