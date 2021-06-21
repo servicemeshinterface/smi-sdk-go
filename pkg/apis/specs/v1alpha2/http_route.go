@@ -35,11 +35,11 @@ type HTTPMatch struct {
 	PathRegex string `json:"pathRegex,omitempty"`
 
 	// Headers is a list of headers used to match HTTP traffic
-	Headers httpHeaders `json:"headers,omitempty"`
+	Headers HTTPHeaders `json:"headers,omitempty"`
 }
 
 // httpHeaders is a map of key/value pairs which match HTTP header name and value
-type httpHeaders map[string]string
+type HTTPHeaders map[string]string
 
 // HTTPRouteMethod are methods allowed by the route
 type HTTPRouteMethod string

@@ -6,7 +6,7 @@ import (
 )
 
 // UnmarshalJSON converts a given array of single value maps to one map
-func (h *httpHeaders) UnmarshalJSON(b []byte) error {
+func (h *HTTPHeaders) UnmarshalJSON(b []byte) error {
 	*h = make(map[string]string)
 	var temp []map[string]string
 	if err := json.Unmarshal(b, &temp); err != nil {
@@ -25,7 +25,7 @@ func (h *httpHeaders) UnmarshalJSON(b []byte) error {
 }
 
 // MarshalJSON converts a given map to array of single value maps
-func (h httpHeaders) MarshalJSON() ([]byte, error) {
+func (h HTTPHeaders) MarshalJSON() ([]byte, error) {
 	var returnArr []map[string]string
 	for key, val := range h {
 		returnArr = append(returnArr, map[string]string{key: val})
